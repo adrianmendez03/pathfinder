@@ -5,7 +5,9 @@ interface Props {
 }
 
 const Tile: React.FC<Props> = (props) => {
-  return <td className={`col-${props.index}`}>Tile</td>
+  return (
+    <div className={`grid__tile grid__tile--round col-${props.index}`}></div>
+  )
 }
 
 export default Tile

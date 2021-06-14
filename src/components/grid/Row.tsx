@@ -9,11 +9,11 @@ interface Props {
 
 const Row: React.FC<Props> = (props) => {
   return (
-    <tr id={`row-${props.index}`}>
+    <div className={`flex--row grid__row row-${props.index}`}>
       {new Array(props.cols).fill(true).map((el, index) => {
         return <Tile index={index} key={index} />
       })}
-    </tr>
+    </div>
   )
 }
 
