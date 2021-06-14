@@ -1,6 +1,6 @@
 import React from "react"
 
-import Square from "./Square"
+import Tile from "./Tile"
 
 interface Props {
   cols: number
@@ -11,7 +11,7 @@ const Row: React.FC<Props> = (props) => {
     <div>
       Row
       {new Array(props.cols).fill(true).map((el, index) => {
-        return <Square key={index} />
+        return <Tile key={index} />
       })}
     </div>
   )
