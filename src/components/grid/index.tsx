@@ -15,10 +15,27 @@ const Grid: React.FC<Props> = (props) => {
     cols: 14,
   })
 
+  const [createWalls, setCreateWalls] = useState(false)
+
+  const handleClick = () => {
+    if (createWalls) {
+      setCreateWalls(false)
+    } else {
+      setCreateWalls(true)
+    }
+  }
+
   return (
-    <div className="grid">
+    <div className="grid" onClick={handleClick}>
       {new Array(size.rows).fill(true).map((el, index) => {
-        return <Row index={index} key={index} cols={size.cols} />
+        return (
+          <Row
+            key={index}
+            index={index}
+            cols={size.cols}
+            createWalls={createWalls}
+          />
+        )
       })}
     </div>
   )
