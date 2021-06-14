@@ -1,7 +1,11 @@
 import React from "react"
 
-const Tile: React.FC = () => {
-  return <div>Tile</div>
+interface Props {
+  index: number
+}
+
+const Tile: React.FC<Props> = (props) => {
+  return <div className={`col-${props.index}`}>Tile</div>
 }
 
 export default Tile

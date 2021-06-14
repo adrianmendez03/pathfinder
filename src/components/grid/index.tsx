@@ -18,7 +18,7 @@ const Grid: React.FC<Props> = (props) => {
     <div>
       Grid
       {new Array(size.rows).fill(true).map((el, index) => {
-        return <Row key={index} cols={size.cols} />
+        return <Row index={index} key={index} cols={size.cols} />
       })}
     </div>
   )
