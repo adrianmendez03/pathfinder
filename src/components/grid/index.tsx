@@ -15,12 +15,12 @@ const Grid: React.FC<Props> = (props) => {
   })
 
   return (
-    <div>
+    <table id="grid">
       Grid
       {new Array(size.rows).fill(true).map((el, index) => {
         return <Row index={index} key={index} cols={size.cols} />
       })}
-    </div>
+    </table>
   )
 }
 

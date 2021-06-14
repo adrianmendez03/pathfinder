@@ -9,12 +9,11 @@ interface Props {
 
 const Row: React.FC<Props> = (props) => {
   return (
-    <div id={`row-${props.index}`}>
-      Row
+    <tr id={`row-${props.index}`}>
       {new Array(props.cols).fill(true).map((el, index) => {
         return <Tile index={index} key={index} />
       })}
-    </div>
+    </tr>
   )
 }
 
