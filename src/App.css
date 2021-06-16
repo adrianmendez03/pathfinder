@@ -5,3 +5,7 @@
   padding: 5px;
   background-color: var(--primary);
 }
+
+button {
+  cursor: pointer;
+}

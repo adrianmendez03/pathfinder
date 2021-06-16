@@ -3,7 +3,9 @@ import React, { useState } from "react"
 import Row from "./Row"
 import "./Grid.css"
 
-interface Props {}
+interface Props {
+  gridRef: React.MutableRefObject<null>
+}
 interface Size {
   rows: number
   cols: number
@@ -11,8 +13,8 @@ interface Size {
 
 const Grid: React.FC<Props> = (props) => {
   const [size, setSize] = useState<Size>({
-    rows: 25,
-    cols: 15,
+    rows: 60,
+    cols: 60,
   })
 
   const [createWalls, setCreateWalls] = useState(false)
@@ -26,7 +28,7 @@ const Grid: React.FC<Props> = (props) => {
   }
 
   return (
-    <div className="grid" onClick={handleClick}>
+    <div ref={props.gridRef} className="grid" onClick={handleClick}>
       {new Array(size.rows).fill(true).map((el, index) => {
         return (
           <Row

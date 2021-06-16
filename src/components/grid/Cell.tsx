@@ -4,6 +4,7 @@ interface Props {
   index: number
   createWalls: boolean
   type: string
+  rowIndex: number
 }
 interface ColorStyle {
   backgroundColor: string
@@ -36,6 +37,7 @@ const Tile: React.FC<Props> = (props) => {
       style={tileColor}
       onMouseEnter={handleMouseEnter}
       data-visited={false}
+      data-coords={[props.index, props.rowIndex]}
     ></div>
   )
 }

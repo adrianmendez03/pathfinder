@@ -18,6 +18,7 @@ const Row: React.FC<Props> = (props) => {
             key={index}
             index={index}
             createWalls={props.createWalls}
+            rowIndex={props.index}
             type={type}
           />
         )
