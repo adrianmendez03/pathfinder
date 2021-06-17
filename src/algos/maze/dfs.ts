@@ -12,6 +12,10 @@ const randomIndex = (bound: number): number => {
   return Math.floor(Math.random() * bound)
 }
 
+const sleep = (ms: number) => {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 const getUnvisitedNeighbours = (
   grid: React.MutableRefObject<any>,
   x: number,
@@ -76,7 +80,8 @@ const getUnvisitedNeighbours = (
   return univisitedNeighbours
 }
 
-export const dfs = (grid: React.MutableRefObject<any>) => {
+export const dfs = async (grid: React.MutableRefObject<any>) => {
+  console.log("clicked")
   // Create a bounds object to hold the size of the grid
   const bounds = {
     x: Math.ceil(grid.current.children[0].children.length),
@@ -99,6 +104,8 @@ export const dfs = (grid: React.MutableRefObject<any>) => {
   while (stack.length > 0) {
     // ... pop a cell from the stack and make it a current cell
     const currentCell: Cell | undefined = stack.pop()
+    currentCell!.cell.style.background = "#4ce997"
+    await sleep(25)
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
       currentCell!.coords.x,
@@ -122,5 +129,6 @@ export const dfs = (grid: React.MutableRefObject<any>) => {
       randomNeighbour!.cell.dataset.visited = true
       stack.push(randomNeighbour)
     }
+    currentCell!.cell.style.background = "#111928"
   }
 }
