@@ -1,43 +1,30 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 interface Props {
   index: number
   createWalls: boolean
   type: string
-  rowIndex: number
-}
-interface ColorStyle {
-  backgroundColor: string
 }
 
 const Tile: React.FC<Props> = (props) => {
-  const [tileColor, setTileColor] = useState<ColorStyle | undefined>()
+  const [nameOfClass, setNameOfClass] = useState<String | undefined>()
+  const cellRef = useRef<any>()
 
   useEffect(() => {
     if (props.type === "path") {
-      setTileColor({ backgroundColor: "#111928" })
+      setNameOfClass("grid__cell--path")
     } else {
-      setTileColor({ backgroundColor: "#262f3b" })
+      setNameOfClass("grid__cell--wall")
     }
-  }, [props.type])
 
-  const handleMouseEnter = () => {
-    if (props.createWalls) {
-      if (tileColor!.backgroundColor === "#262f3b") {
-        setTileColor({ backgroundColor: "#111928" })
-      } else {
-        setTileColor({ backgroundColor: "#262f3b" })
-      }
-    }
-  }
+    cellRef.current.classList.add(nameOfClass)
+  }, [nameOfClass, props.type])
 
   return (
     <div
       className={`grid__cell grid__cell--round col-${props.index}`}
-      style={tileColor}
-      onMouseEnter={handleMouseEnter}
+      ref={cellRef}
       data-visited={false}
-      data-coords={[props.index, props.rowIndex]}
     ></div>
   )
 }

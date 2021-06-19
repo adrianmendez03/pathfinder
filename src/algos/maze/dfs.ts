@@ -1,3 +1,5 @@
+// import format from "./format"
+
 interface Cell {
   cell: any
   coords: Coords
@@ -67,7 +69,6 @@ const getUnvisitedNeighbours = (
       : undefined
 
   const neighbours = [top, right, bottom, left]
-  console.log(top, right, bottom, left, x, y, bounds)
   const univisitedNeighbours = neighbours.filter((neighbour) => {
     if (neighbour) {
       const { visited } = neighbour.cell.dataset
@@ -81,7 +82,6 @@ const getUnvisitedNeighbours = (
 }
 
 export const dfs = async (grid: React.MutableRefObject<any>) => {
-  console.log("clicked")
   // Create a bounds object to hold the size of the grid
   const bounds = {
     x: Math.ceil(grid.current.children[0].children.length),
@@ -104,7 +104,7 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
   while (stack.length > 0) {
     // ... pop a cell from the stack and make it a current cell
     const currentCell: Cell | undefined = stack.pop()
-    currentCell!.cell.style.background = "#4ce997"
+    currentCell!.cell.classList.add("grid__cell--current")
     await sleep(25)
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
@@ -124,11 +124,12 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
         grid.current.children[
           (currentCell!.coords.y + randomNeighbour!.coords.y) / 2
         ].children[(currentCell!.coords.x + randomNeighbour!.coords.x) / 2]
-      wall.style.background = "#111928"
+      wall.classList.remove("grid__cell--wall")
+      wall.classList.add("grid__cell--path")
       // ... mark the neighbour as visited and push it into the stack.
       randomNeighbour!.cell.dataset.visited = true
       stack.push(randomNeighbour)
     }
-    currentCell!.cell.style.background = "#111928"
+    currentCell!.cell.classList.remove("grid__cell--current")
   }
 }

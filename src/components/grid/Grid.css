@@ -13,8 +13,16 @@
 .grid__cell {
   width: 20px;
   height: 20px;
+}
+
+.grid__cell--path {
   background-color: var(--primary);
 }
 
-.grid__cell--round {
+.grid__cell--wall {
+  background-color: var(--secondary);
+}
+
+.grid__cell--current {
+  background-color: var(--accent) !important;
 }
