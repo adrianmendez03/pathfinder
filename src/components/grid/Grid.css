@@ -24,5 +24,18 @@
 }
 
 .grid__cell--current {
-  background-color: var(--accent) !important;
+  background-color: var(--accent);
+}
+
+.grid__cell--animate {
+  animation: 0.3s linear grow;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0.5);
+  }
+  to {
+    tranform: scale(1);
+  }
 }
