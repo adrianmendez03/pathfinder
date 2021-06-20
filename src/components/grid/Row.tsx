@@ -12,7 +12,7 @@ const Row: React.FC<Props> = (props) => {
   return (
     <div className={`flex--row grid__row row-${props.index}`}>
       {new Array(props.cols).fill(true).map((el, index) => {
-        const type = index % 2 === 0 && props.index % 2 === 0 ? "path" : "wall"
+        const type = "path"
         return (
           <Tile
             key={index}

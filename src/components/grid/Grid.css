@@ -27,7 +27,7 @@
   background-color: var(--accent);
 }
 
-.grid__cell--animate {
+.grid__cell--animate-grow {
   animation: 0.3s linear grow;
 }
 

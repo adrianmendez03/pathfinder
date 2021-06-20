@@ -17,7 +17,9 @@ const Tile: React.FC<Props> = (props) => {
       setNameOfClass("grid__cell--wall")
     }
 
-    cellRef.current.classList.add(nameOfClass)
+    if (nameOfClass) {
+      cellRef.current.classList.add(nameOfClass)
+    }
   }, [nameOfClass, props.type])
 
   return (

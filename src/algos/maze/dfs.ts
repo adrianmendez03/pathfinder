@@ -1,5 +1,8 @@
 // import format from "./format"
 
+import { gridFormat } from "./format"
+import { generateBounds } from "./utils"
+
 interface Cell {
   cell: any
   coords: Coords
@@ -72,7 +75,6 @@ const getUnvisitedNeighbours = (
   const univisitedNeighbours = neighbours.filter((neighbour) => {
     if (neighbour) {
       const { visited } = neighbour.cell.dataset
-      console.log(visited)
       return visited !== "true"
     }
     return false
@@ -82,11 +84,9 @@ const getUnvisitedNeighbours = (
 }
 
 export const dfs = async (grid: React.MutableRefObject<any>) => {
+  await gridFormat(grid)
   // Create a bounds object to hold the size of the grid
-  const bounds = {
-    x: Math.ceil(grid.current.children[0].children.length),
-    y: Math.ceil(grid.current.children.length),
-  }
+  const bounds = generateBounds(grid)
   // This is an iterative implementation of DFS so a stack is needed
   const stack = []
   // Choose an initial cell, mark it as visited and push it into the stack
@@ -106,9 +106,9 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
     const currentCell: Cell | undefined = stack.pop()
     currentCell!.cell.classList.add(
       "grid__cell--current",
-      "grid__cell--animate"
+      "grid__cell--animate-grow"
     )
-    await sleep(10)
+    await sleep(5)
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
       currentCell!.coords.x,
