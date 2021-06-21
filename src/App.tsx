@@ -1,7 +1,8 @@
 import React, { useRef } from "react"
 
 import Grid from "./components/grid"
-import { dfs } from "./algos/maze/dfs"
+import Menu from "./components/menu"
+import Footer from "./components/footer"
 import "./App.css"
 import "./styles/utils.css"
 
@@ -11,7 +12,8 @@ const App: React.FC = () => {
   return (
     <div id="app">
       <Grid gridRef={gridRef} />
-      <button onClick={() => dfs(gridRef)}>DFS</button>
+      <Menu grid={gridRef} />
+      <Footer />
     </div>
   )
 }

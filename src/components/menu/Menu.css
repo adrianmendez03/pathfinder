@@ -1,0 +1,21 @@
+@import "../../styles/variables.css";
+
+.menu {
+  background-color: var(--secondary);
+  padding: 5px;
+}
+
+.menu .flex--col:last-child {
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.menu .flex--col:last-child .button {
+  width: 44px;
+  height: 44px;
+}
+
+.menu .flex--col:last-child .button i {
+  font-size: 22px;
+}

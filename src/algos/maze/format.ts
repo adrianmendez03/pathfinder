@@ -1,4 +1,18 @@
-import { cleanTile, generateBounds } from "./utils"
+import { generateBounds } from "./utils"
+
+const cleanTile = (tile: HTMLElement) => {
+  const classes = new Set(tile.classList)
+
+  if (classes.has("grid__cell--animate-grow")) {
+    tile.classList.remove("grid__cell--animate-grow")
+  }
+
+  if (classes.has("grid__cell--path")) {
+    tile.classList.remove("grid__cell--path")
+  } else {
+    tile.classList.remove("grid__cell--wall")
+  }
+}
 
 export const gridFormat = (grid: React.MutableRefObject<any>) => {
   // Create our bounds.
@@ -7,6 +21,7 @@ export const gridFormat = (grid: React.MutableRefObject<any>) => {
   for (let i = 0; i < bounds.y; i++) {
     for (let j = 0; j < bounds.x; j++) {
       const tile = grid.current.children[i].children[j]
+      tile.dataset.visited = false
       cleanTile(tile)
       // ... if tile is even on its x and y axis make it a path
       // else make it a wall

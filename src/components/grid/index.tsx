@@ -13,8 +13,8 @@ interface Size {
 
 const Grid: React.FC<Props> = (props) => {
   const [size, setSize] = useState<Size>({
-    rows: 45,
-    cols: 89,
+    rows: 25,
+    cols: 19,
   })
 
   const [createWalls, setCreateWalls] = useState(false)
@@ -28,7 +28,11 @@ const Grid: React.FC<Props> = (props) => {
   }
 
   return (
-    <div ref={props.gridRef} className="grid" onClick={handleClick}>
+    <div
+      ref={props.gridRef}
+      className="grid rounded-corners"
+      onClick={handleClick}
+    >
       {new Array(size.rows).fill(true).map((el, index) => {
         return (
           <Row

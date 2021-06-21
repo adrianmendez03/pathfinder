@@ -1,11 +1,30 @@
 @import "./styles/variables.css";
 
+* {
+  box-sizing: border-box;
+}
+
 #app {
   height: 100vh;
   padding: 5px;
   background-color: var(--primary);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 button {
+  background-color: transparent;
+  border: none;
   cursor: pointer;
+}
+
+footer {
+  color: var(--secondary);
+  text-align: center;
+  padding: 5px;
+}
+
+footer a {
+  color: var(--secondary);
 }

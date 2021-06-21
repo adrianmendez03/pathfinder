@@ -108,7 +108,7 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
       "grid__cell--current",
       "grid__cell--animate-grow"
     )
-    await sleep(5)
+    await sleep(15)
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
       currentCell!.coords.x,
@@ -128,7 +128,7 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
           (currentCell!.coords.y + randomNeighbour!.coords.y) / 2
         ].children[(currentCell!.coords.x + randomNeighbour!.coords.x) / 2]
       wall.classList.remove("grid__cell--wall")
-      wall.classList.add("grid__cell--path")
+      wall.classList.add("grid__cell--path", "grid__cell--animate-grow")
       // ... mark the neighbour as visited and push it into the stack.
       randomNeighbour!.cell.dataset.visited = true
       stack.push(randomNeighbour)
