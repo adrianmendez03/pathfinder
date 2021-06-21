@@ -1,6 +1,7 @@
 @import "../../styles/variables.css";
 
 .grid {
+  width: min-content;
   padding: 5px;
   background-color: var(--secondary);
 }
