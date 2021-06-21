@@ -5,7 +5,7 @@
   background-color: var(--secondary);
 }
 
-.grid--row {
+.grid__row {
   justify-content: center;
 }
 
