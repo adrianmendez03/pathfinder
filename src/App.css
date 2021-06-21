@@ -1,7 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Reem+Kufi&display=swap");
+
 @import "./styles/variables.css";
 
 * {
+  font-family: "Reem Kufi", sans-serif;
+  color: var(--text);
   box-sizing: border-box;
+  font-weight: bold;
 }
 
 #app {
@@ -11,7 +16,11 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
 }
 
 button {

@@ -6,7 +6,7 @@ interface Props {
   type: string
 }
 
-const Tile: React.FC<Props> = (props) => {
+const Cell: React.FC<Props> = (props) => {
   const [nameOfClass, setNameOfClass] = useState<String | undefined>()
   const cellRef = useRef<any>()
 
@@ -31,4 +31,4 @@ const Tile: React.FC<Props> = (props) => {
   )
 }
 
-export default Tile
+export default Cell
