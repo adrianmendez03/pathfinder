@@ -2,20 +2,32 @@
 
 .menu {
   background-color: var(--secondary);
-  padding: 5px;
+  padding: 10px;
+  text-transform: uppercase;
+  overflow-y: auto;
 }
 
-.menu .flex--col:last-child {
-  width: 100%;
-  align-items: center;
+.menu .flex--col {
   justify-content: center;
+  align-items: center;
 }
 
-.menu .flex--col:last-child .button {
-  width: 44px;
-  height: 44px;
+.menu .menu__inputs {
+  width: 100%;
+  margin: 5px 0;
 }
 
-.menu .flex--col:last-child .button i {
-  font-size: 22px;
+.menu .menu__inputs p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.menu .menu__inputs ul {
+  margin: 0;
+  overflow-x: auto;
+}
+
+.menu .menu__inputs ul .button {
+  min-width: 80px;
+  width: min-content;
 }
