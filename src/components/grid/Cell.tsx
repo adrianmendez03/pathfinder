@@ -4,6 +4,7 @@ interface Props {
   index: number
   createWalls: boolean
   type: string
+  rowIndex: number
 }
 
 const Cell: React.FC<Props> = (props) => {

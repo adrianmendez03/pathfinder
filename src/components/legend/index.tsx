@@ -1,21 +1,11 @@
 import React from "react"
 
+import { tiles } from "./tiles"
 import "./Legend.css"
 
 interface Props {}
 
 const Legend: React.FC<Props> = (props) => {
-  const tiles = [
-    {
-      name: "Wall",
-      class: "grid__cell--wall",
-    },
-    {
-      name: "Path",
-      class: "grid__cell--path",
-    },
-  ]
-
   const renderTiles = () => {
     return tiles.map((tile, index) => {
       return (
