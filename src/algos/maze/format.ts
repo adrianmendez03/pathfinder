@@ -14,12 +14,25 @@ const cleanTile = (tile: HTMLElement) => {
   }
 }
 
-export const gridFormat = (grid: React.MutableRefObject<any>) => {
+export const noWalls = (grid: React.MutableRefObject<any>) => {
+  const bounds = generateBounds(grid)
+
+  for (let i = 0; i < bounds.y.end; i++) {
+    for (let j = 0; j < bounds.x.end; j++) {
+      const tile = grid.current.children[i].children[j]
+      tile.dataset.visited = false
+      cleanTile(tile)
+      tile.classList.add("grid__cell--path")
+    }
+  }
+}
+
+export const seperatedCells = (grid: React.MutableRefObject<any>) => {
   // Create our bounds.
   const bounds = generateBounds(grid)
   // For every tile in the grid...
-  for (let i = 0; i < bounds.y; i++) {
-    for (let j = 0; j < bounds.x; j++) {
+  for (let i = 0; i < bounds.y.end; i++) {
+    for (let j = 0; j < bounds.x.end; j++) {
       const tile = grid.current.children[i].children[j]
       tile.dataset.visited = false
       cleanTile(tile)

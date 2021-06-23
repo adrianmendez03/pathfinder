@@ -37,6 +37,7 @@ const Menu: React.FC<Props> = (props) => {
       running: true,
     })
 
+    await button.format(props.grid)
     await button.function(props.grid)
 
     setOptions({

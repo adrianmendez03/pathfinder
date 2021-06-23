@@ -1,33 +1,19 @@
-// import format from "./format"
-
-import { gridFormat } from "./format"
-import { generateBounds } from "./utils"
-
-interface Cell {
-  cell: any
-  coords: Coords
-}
-
-interface Coords {
-  x: number
-  y: number
-}
-
-const randomIndex = (bound: number): number => {
-  return Math.floor(Math.random() * bound)
-}
-
-const sleep = (ms: number) => {
-  return new Promise((resolve) => setTimeout(resolve, ms))
-}
+import { Coords, Cell } from "../interface"
+import { generateBounds, randomInteger, sleep } from "./utils"
 
 const getUnvisitedNeighbours = (
   grid: React.MutableRefObject<any>,
   x: number,
   y: number,
   bounds: {
-    x: number
-    y: number
+    x: {
+      start: number
+      end: number
+    }
+    y: {
+      start: number
+      end: number
+    }
   }
 ) => {
   const top: Cell | undefined =
@@ -41,7 +27,7 @@ const getUnvisitedNeighbours = (
         }
       : undefined
   const right: Cell | undefined =
-    x + 2 < bounds.x
+    x + 2 < bounds.x.end
       ? {
           cell: grid.current.children[y].children[x + 2],
           coords: {
@@ -51,7 +37,7 @@ const getUnvisitedNeighbours = (
         }
       : undefined
   const bottom: Cell | undefined =
-    y + 2 < bounds.y
+    y + 2 < bounds.y.end
       ? {
           cell: grid.current.children[y + 2].children[x],
           coords: {
@@ -84,15 +70,14 @@ const getUnvisitedNeighbours = (
 }
 
 export const dfs = async (grid: React.MutableRefObject<any>) => {
-  await gridFormat(grid)
   // Create a bounds object to hold the size of the grid
   const bounds = generateBounds(grid)
   // This is an iterative implementation of DFS so a stack is needed
   const stack = []
   // Choose an initial cell, mark it as visited and push it into the stack
   const coords: Coords = {
-    x: randomIndex(Math.ceil(bounds.x) / 2) * 2,
-    y: randomIndex(Math.ceil(bounds.y) / 2) * 2,
+    x: randomInteger(Math.ceil(bounds.x.end) / 2) * 2,
+    y: randomInteger(Math.ceil(bounds.y.end) / 2) * 2,
   }
   const initialCell: Cell = {
     cell: grid.current.children[coords.y].children[coords.x],
@@ -121,7 +106,7 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
       stack.push(currentCell)
       // ... choose a random neighbour...
       const randomNeighbour =
-        unvisitedNeighbours[randomIndex(unvisitedNeighbours.length)]
+        unvisitedNeighbours[randomInteger(unvisitedNeighbours.length)]
       // ... remove the wall between the current cell and the chosen cell...
       const wall =
         grid.current.children[

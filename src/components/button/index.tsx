@@ -1,6 +1,5 @@
 import React from "react"
 
-import { ButtonFormat } from "../menu/buttons"
 import "./Button.css"
 
 interface Props {
