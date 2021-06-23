@@ -16,7 +16,6 @@ interface Options {
 }
 
 const Menu: React.FC<Props> = (props) => {
-  const [algo, setAlgo] = useState<string | null>(null)
   const [options, setOptions] = useState<Options>({
     algo: null,
     maze: null,
@@ -24,12 +23,12 @@ const Menu: React.FC<Props> = (props) => {
   })
   const visualzePathButton = useRef<HTMLButtonElement>(null)
 
-  const toggleRun = () => {
-    setOptions({
-      ...options,
-      running: !options.running,
-    })
-  }
+  // const toggleRun = () => {
+  //   setOptions({
+  //     ...options,
+  //     running: !options.running,
+  //   })
+  // }
 
   const generateMaze = async (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
@@ -59,8 +58,8 @@ const Menu: React.FC<Props> = (props) => {
   const visualzePath = async () => {
     // toggleRun()
 
-    if (algo) {
-      switch (algo) {
+    if (options.algo) {
+      switch (options.algo) {
         default:
           break
       }
