@@ -1,8 +1,8 @@
 import React, { useState, useRef } from "react"
 
-import { dfs } from "../../algos/maze/dfs"
 import { mazes, algos } from "./buttons"
 import Button from "../button"
+import { ButtonFormat } from "./buttons"
 import "./Menu.css"
 
 interface Props {
@@ -30,27 +30,18 @@ const Menu: React.FC<Props> = (props) => {
   //   })
   // }
 
-  const generateMaze = async (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const generateMaze = async (button: ButtonFormat) => {
     setOptions({
       ...options,
-      maze: (event.target as HTMLButtonElement).value,
+      maze: button.name,
       running: true,
     })
 
-    const value = (event.target as HTMLButtonElement).value
-    switch (value) {
-      case "dfs":
-        await dfs(props.grid)
-        break
-      default:
-        break
-    }
+    await button.function(props.grid)
 
     setOptions({
       ...options,
-      maze: (event.target as HTMLButtonElement).value,
+      maze: button.name,
       running: false,
     })
   }
@@ -70,32 +61,29 @@ const Menu: React.FC<Props> = (props) => {
     // toggleRun()
   }
 
-  const handleAlgoClick = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ) => {
+  const handleAlgoClick = (button: ButtonFormat) => {
     visualzePathButton.current!.classList.remove("button--error-outline")
-    const value = (event.target as HTMLButtonElement).value
 
     setOptions({
       ...options,
-      algo: value,
+      algo: button.name,
     })
   }
 
   const renderButtons = (
-    buttons: string[],
+    buttons: ButtonFormat[],
     type: keyof Options,
-    callback: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+    callback: (button: ButtonFormat) => void
   ) => {
     return buttons.map((button, index) => {
       return (
         <li key={index}>
           <Button
             name={type}
-            callback={callback}
-            text={button}
+            callback={() => callback(button)}
+            text={button.name}
             class={
-              options[type] === button
+              options[type] === button.name
                 ? "button--accent-filled"
                 : "button--accent-outline"
             }

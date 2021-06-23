@@ -1,5 +1,6 @@
 import React from "react"
 
+import { ButtonFormat } from "../menu/buttons"
 import "./Button.css"
 
 interface Props {
@@ -8,7 +9,7 @@ interface Props {
   text: string
   class: string
   name: string
-  callback: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  callback: () => void
 }
 
 const Button: React.FC<Props> = (props) => {
@@ -18,7 +19,7 @@ const Button: React.FC<Props> = (props) => {
       name={props.name}
       value={props.text}
       className={`button ${props.class}`}
-      onClick={(event) => props.callback(event)}
+      onClick={props.callback}
       disabled={props.disabled ? props.disabled : false}
     >
       {props.text}

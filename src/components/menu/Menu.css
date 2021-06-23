@@ -29,5 +29,6 @@
 
 .menu .menu__inputs ul .button {
   min-width: 80px;
-  width: min-content;
+  width: max-content;
+  padding: 0 12px;
 }
