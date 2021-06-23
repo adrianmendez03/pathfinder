@@ -11,3 +11,12 @@
 .button--accent-outline {
   border: 2px solid var(--accent);
 }
+
+.button--error-outline {
+  border: 2px solid var(--compare);
+}
+
+.button--accent-filled {
+  border: 2px solid var(--accent);
+  background-color: var(--accent);
+}

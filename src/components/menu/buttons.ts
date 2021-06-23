@@ -1,2 +1,2 @@
-export const mazes = ["DFS", "DFS", "DFS", "DFS"]
-export const algos = ["DFS", "DFS", "DFS", "DFS"]
+export const mazes = ["dfs", "dfs 2", "dfs 3", "dfs 4"]
+export const algos = ["dfs", "dfs 2", "dfs 3", "dfs 4"]

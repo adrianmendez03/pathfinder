@@ -3,26 +3,25 @@ import React from "react"
 import "./Button.css"
 
 interface Props {
-  text?: string
-  icon?: string
+  refCallback?: React.RefObject<HTMLButtonElement>
+  disabled?: boolean
+  text: string
   class: string
-  callback: (event?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  name: string
+  callback: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 const Button: React.FC<Props> = (props) => {
-  return props.text ? (
+  return (
     <button
+      ref={props.refCallback ? props.refCallback : null}
+      name={props.name}
+      value={props.text}
       className={`button ${props.class}`}
       onClick={(event) => props.callback(event)}
+      disabled={props.disabled ? props.disabled : false}
     >
       {props.text}
-    </button>
-  ) : (
-    <button
-      className={`button ${props.class}`}
-      onClick={(event) => props.callback(event)}
-    >
-      <i className={props.icon}></i>
     </button>
   )
 }
