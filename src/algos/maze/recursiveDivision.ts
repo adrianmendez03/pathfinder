@@ -14,10 +14,8 @@ export const recursiveDivision = async (
 
   const width = x.end - x.start
   const height = y.end - y.start
-  console.log("blah")
 
-  if (width * height < 4) {
-    console.log("blah")
+  if (width <= 2 || height <= 2) {
     return
   }
 

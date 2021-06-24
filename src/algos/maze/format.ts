@@ -9,12 +9,14 @@ const cleanTile = (tile: HTMLElement) => {
 
   if (classes.has("grid__cell--path")) {
     tile.classList.remove("grid__cell--path")
-  } else {
+  }
+
+  if (classes.has("grid__cell--wall")) {
     tile.classList.remove("grid__cell--wall")
   }
 }
 
-export const noWalls = (grid: React.MutableRefObject<any>) => {
+export const noWalls = async (grid: React.MutableRefObject<any>) => {
   const bounds = generateBounds(grid)
 
   for (let i = 0; i < bounds.y.end; i++) {
