@@ -15,6 +15,13 @@ export const randomInteger = (bound: number): number => {
   return Math.floor(Math.random() * bound)
 }
 
+export const randomIntegerBetweenTwoValues = (
+  min: number,
+  max: number
+): number => {
+  return Math.floor(Math.random() * (max - min) + min)
+}
+
 export const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
