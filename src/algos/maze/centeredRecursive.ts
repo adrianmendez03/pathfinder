@@ -10,7 +10,7 @@ const chooseWallDirection = (width: number, height: number): string => {
   return width < randomValue ? "horizontal" : "vertical"
 }
 
-export const recursiveDivision = async (
+export const centeredRecursive = async (
   grid: React.MutableRefObject<any>,
   bounds = generateBounds(grid)
 ) => {
@@ -31,11 +31,9 @@ export const recursiveDivision = async (
       : Math.floor((x.start + width / 2) / 2) * 2
   const gapIndex =
     wallDirection === "horizontal"
-      ? Math.floor(randomIntegerBetweenTwoValues(x.start + 1, x.end - 1) / 2) *
-          2 +
+      ? Math.floor(randomIntegerBetweenTwoValues(x.start, x.end - 1) / 2) * 2 +
         1
-      : Math.floor(randomIntegerBetweenTwoValues(y.start + 1, y.end - 1) / 2) *
-          2 +
+      : Math.floor(randomIntegerBetweenTwoValues(y.start, y.end - 1) / 2) * 2 +
         1
 
   for (let i = 0; i < wallLength; i++) {
@@ -70,8 +68,8 @@ export const recursiveDivision = async (
         end: y.end,
       },
     }
-    await recursiveDivision(grid, topBounds)
-    await recursiveDivision(grid, bottomBounds)
+    await centeredRecursive(grid, topBounds)
+    await centeredRecursive(grid, bottomBounds)
   } else {
     const leftBounds = {
       ...bounds,
@@ -87,7 +85,7 @@ export const recursiveDivision = async (
         end: x.end,
       },
     }
-    await recursiveDivision(grid, leftBounds)
-    await recursiveDivision(grid, rightBounds)
+    await centeredRecursive(grid, leftBounds)
+    await centeredRecursive(grid, rightBounds)
   }
 }

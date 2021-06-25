@@ -1,3 +1,10 @@
+import { Coords } from "../interface"
+
+export interface Bounds {
+  x: Coords
+  y: Coords
+}
+
 export const generateBounds = (grid: React.MutableRefObject<any>) => {
   return {
     x: {

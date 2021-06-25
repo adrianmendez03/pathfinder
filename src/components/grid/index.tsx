@@ -14,7 +14,7 @@ interface Size {
 const Grid: React.FC<Props> = (props) => {
   const [size, setSize] = useState<Size>({
     rows: 17,
-    cols: 19,
+    cols: 17,
   })
 
   const [createWalls, setCreateWalls] = useState(false)
