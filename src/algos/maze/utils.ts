@@ -1,8 +1,11 @@
-import { Coords } from "../interface"
+export interface Bound {
+  start: number
+  end: number
+}
 
 export interface Bounds {
-  x: Coords
-  y: Coords
+  x: Bound
+  y: Bound
 }
 
 export const generateBounds = (grid: React.MutableRefObject<any>) => {
@@ -27,6 +30,11 @@ export const randomIntegerBetweenTwoValues = (
   max: number
 ): number => {
   return Math.floor(Math.random() * (max - min) + min)
+}
+
+export const breakdownWall = (cell: any) => {
+  cell.classList.remove("grid__cell--wall")
+  cell.classList.add("grid__cell--path", "grid__cell--animate-grow")
 }
 
 export const sleep = (ms: number) => {

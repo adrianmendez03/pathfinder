@@ -2,6 +2,7 @@ import { dfs } from "../../algos/maze/dfs"
 import { recursiveDivision } from "../../algos/maze/recursive"
 import { centeredRecursive } from "../../algos/maze/centeredRecursive"
 import { noWalls, seperatedCells } from "../../algos/maze/format"
+import { binaryTree } from "../../algos/maze/binaryTree"
 
 export interface ButtonFormat {
   name: string
@@ -31,5 +32,10 @@ export const mazes = [
     name: "centered recursion",
     function: centeredRecursive,
     format: noWalls,
+  },
+  {
+    name: "Binary Tree",
+    function: binaryTree,
+    format: seperatedCells,
   },
 ]

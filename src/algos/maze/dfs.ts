@@ -1,5 +1,5 @@
 import { Coords, Cell } from "../interface"
-import { generateBounds, randomInteger, sleep } from "./utils"
+import { generateBounds, randomInteger, breakdownWall, sleep } from "./utils"
 
 const getUnvisitedNeighbours = (
   grid: React.MutableRefObject<any>,
@@ -89,10 +89,7 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
   while (stack.length > 0) {
     // ... pop a cell from the stack and make it a current cell
     const currentCell: Cell | undefined = stack.pop()
-    currentCell!.cell.classList.add(
-      "grid__cell--current",
-      "grid__cell--animate-grow"
-    )
+    currentCell!.cell.classList.add("grid__cell--current")
     await sleep(15)
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
@@ -112,8 +109,7 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
         grid.current.children[
           (currentCell!.coords.y + randomNeighbour!.coords.y) / 2
         ].children[(currentCell!.coords.x + randomNeighbour!.coords.x) / 2]
-      wall.classList.remove("grid__cell--wall")
-      wall.classList.add("grid__cell--path", "grid__cell--animate-grow")
+      breakdownWall(wall)
       // ... mark the neighbour as visited and push it into the stack.
       randomNeighbour!.cell.dataset.visited = true
       stack.push(randomNeighbour)
