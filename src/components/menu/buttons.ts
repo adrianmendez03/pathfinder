@@ -3,6 +3,7 @@ import { recursiveDivision } from "../../algos/maze/recursive"
 import { centeredRecursive } from "../../algos/maze/centeredRecursive"
 import { noWalls, seperatedCells } from "../../algos/maze/format"
 import { binaryTree } from "../../algos/maze/binaryTree"
+import { sideWinder } from "../../algos/maze/sideWinder"
 
 export interface ButtonFormat {
   name: string
@@ -34,8 +35,13 @@ export const mazes = [
     format: noWalls,
   },
   {
-    name: "Binary Tree",
+    name: "binary tree",
     function: binaryTree,
+    format: seperatedCells,
+  },
+  {
+    name: "sidewinder",
+    function: sideWinder,
     format: seperatedCells,
   },
 ]
