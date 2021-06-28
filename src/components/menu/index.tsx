@@ -1,8 +1,7 @@
 import React, { useState, useRef } from "react"
 
-import { mazes, algos } from "./buttons"
 import Button from "../button"
-import { ButtonFormat } from "./buttons"
+import { mazes, algos, distances, ButtonFormat } from "./buttons"
 import "./Menu.css"
 
 interface Props {
@@ -12,6 +11,7 @@ interface Props {
 interface Options {
   algo: string | null
   maze: string | null
+  distance: string
   running: boolean
 }
 
@@ -19,6 +19,7 @@ const Menu: React.FC<Props> = (props) => {
   const [options, setOptions] = useState<Options>({
     algo: null,
     maze: null,
+    distance: "mid",
     running: false,
   })
   const visualzePathButton = useRef<HTMLButtonElement>(null)
@@ -71,6 +72,13 @@ const Menu: React.FC<Props> = (props) => {
     })
   }
 
+  const handleDistanceClick = (button: ButtonFormat) => {
+    setOptions({
+      ...options,
+      distance: button.name,
+    })
+  }
+
   const renderButtons = (
     buttons: ButtonFormat[],
     type: keyof Options,
@@ -95,6 +103,23 @@ const Menu: React.FC<Props> = (props) => {
     })
   }
 
+  const renderSection = (
+    sectionInfo: {
+      header: string
+      buttons: ButtonFormat[]
+    },
+    type: keyof Options,
+    callback: (button: ButtonFormat) => void
+  ) => {
+    const { header, buttons } = sectionInfo
+    return (
+      <section className="menu__inputs">
+        <p>{header}</p>
+        <ul className="flex--row">{renderButtons(buttons, type, callback)}</ul>
+      </section>
+    )
+  }
+
   return (
     <section className="menu flex--col rounded-corners">
       <section className="flex--col">
@@ -110,18 +135,9 @@ const Menu: React.FC<Props> = (props) => {
         />
       </section>
       <section className="flex--col">
-        <section className="menu__inputs">
-          <p>Algorithms</p>
-          <ul className="flex--row">
-            {algos && renderButtons(algos, "algo", handleAlgoClick)}
-          </ul>
-        </section>
-        <section className="menu__inputs">
-          <p>Maze Generation</p>
-          <ul className="flex--row">
-            {mazes && renderButtons(mazes, "maze", generateMaze)}
-          </ul>
-        </section>
+        {algos && renderSection(algos, "algo", handleAlgoClick)}
+        {mazes && renderSection(mazes, "maze", generateMaze)}
+        {distances && renderSection(distances, "distance", handleDistanceClick)}
       </section>
     </section>
   )
