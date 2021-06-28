@@ -11,4 +11,8 @@ export const tiles = [
     name: "Current",
     class: "grid__cell--current",
   },
+  {
+    name: "start",
+    class: "grid__cell--start",
+  },
 ]
