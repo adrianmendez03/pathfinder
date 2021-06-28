@@ -26,22 +26,37 @@ export const sideWinder = async (grid: React.MutableRefObject<any>) => {
   const width = x.end - x.start
   // For every seperate tile...
   for (let i = 0; i < height; i += 2) {
+    // ... create an array to hold the current segment of tiles.
     let currentRun: any[] = []
     for (let j = 0; j < width; j += 2) {
+      // Mark the current tile.
       const cell = grid.current.children[i].children[j]
       cell.classList.add("grid__cell--current")
       await sleep(25)
+      // If the tile is in the first row...
       if (i === 0 && j < width - 1) {
+        // ... breakdown the west wall.
         breakdownWall(grid.current.children[i].children[j + 1])
-      } else if (j === width - 1) {
+      }
+      // If it is the last tile in the row...
+      else if (j === width - 1) {
+        // ... break a random ceiling.
         currentRun.push([j, i])
         await breakRandomCeiling(grid, currentRun, [j, i])
         currentRun = []
-      } else {
+      }
+      // Otherwise...
+      else {
+        // Add the current tile to the current segment array.
         currentRun.push([j, i])
+        // Flip a coin to decide if you'll continue the segment..
         if (randomInteger(2)) {
+          // ... if segment continues, break the west wall.
           breakdownWall(grid.current.children[i].children[j + 1])
-        } else {
+        }
+        // Else...
+        else {
+          //... break a random ceiling.
           await breakRandomCeiling(grid, currentRun, [j, i])
           currentRun = []
         }
