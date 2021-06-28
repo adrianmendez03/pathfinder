@@ -1,5 +1,5 @@
 import { Coords, Cell } from "../interface"
-import { generateBounds, randomInteger, breakdownWall, sleep } from "./utils"
+import { generateBounds, randomInteger, breakdownWall, sleep } from "../utils"
 
 const getUnvisitedNeighbours = (
   grid: React.MutableRefObject<any>,

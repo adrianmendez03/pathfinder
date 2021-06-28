@@ -1,4 +1,4 @@
-import { breakdownWall, generateBounds, randomInteger, sleep } from "./utils"
+import { breakdownWall, generateBounds, randomInteger, sleep } from "../utils"
 
 const breakRandomCeiling = async (
   grid: React.MutableRefObject<any>,

@@ -1,10 +1,5 @@
-import {
-  Bounds,
-  generateBounds,
-  randomInteger,
-  breakdownWall,
-  sleep,
-} from "./utils"
+import { generateBounds, randomInteger, breakdownWall, sleep } from "../utils"
+import { Bounds } from "../interface"
 
 // Function to check if North or West Neighbours exist.
 const fetchNeighbours = (

@@ -1,4 +1,4 @@
-import { generateBounds } from "./utils"
+import { generateBounds } from "../utils"
 
 const cleanTile = (tile: HTMLElement) => {
   const classes = new Set(tile.classList)

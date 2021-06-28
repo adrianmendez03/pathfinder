@@ -3,7 +3,7 @@ import {
   randomInteger,
   randomIntegerBetweenTwoValues,
   sleep,
-} from "./utils"
+} from "../utils"
 
 const chooseWallDirection = (width: number, height: number): string => {
   // Wall direction is based on the width and height.

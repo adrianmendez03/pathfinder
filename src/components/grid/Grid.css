@@ -22,6 +22,10 @@
   background-color: var(--secondary);
 }
 
+.grid__cell--start {
+  background-color: var(--compare);
+}
+
 .grid__cell--current {
   background-color: var(--accent);
 }

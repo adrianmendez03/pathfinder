@@ -28,7 +28,7 @@ const Grid: React.FC<Props> = (props) => {
   }
 
   return (
-    <div
+    <section
       ref={props.gridRef}
       className="grid rounded-corners"
       onClick={handleClick}
@@ -43,7 +43,7 @@ const Grid: React.FC<Props> = (props) => {
           />
         )
       })}
-    </div>
+    </section>
   )
 }
 
