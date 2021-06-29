@@ -1,6 +1,6 @@
 import { generateBounds } from "../utils"
 
-const cleanTile = (tile: HTMLElement) => {
+export const cleanTile = (tile: HTMLElement) => {
   const classes = new Set(tile.classList)
 
   if (classes.has("grid__cell--animate-grow")) {
@@ -13,6 +13,10 @@ const cleanTile = (tile: HTMLElement) => {
 
   if (classes.has("grid__cell--wall")) {
     tile.classList.remove("grid__cell--wall")
+  }
+
+  if (classes.has("grid__cell--start")) {
+    tile.classList.remove("grid__cell--start")
   }
 }
 

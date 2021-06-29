@@ -1,11 +1,12 @@
-import React, { useState, useRef } from "react"
+import React, { useState, useRef, useEffect } from "react"
+import { cleanTile } from "../../algos/maze/format"
 
 import Button from "../button"
 import { mazes, algos, distances, ButtonFormat } from "./buttons"
 import "./Menu.css"
 
 interface Props {
-  grid: React.MutableRefObject<null>
+  grid: React.MutableRefObject<any>
 }
 
 interface Options {
@@ -22,14 +23,84 @@ const Menu: React.FC<Props> = (props) => {
     distance: "mid",
     running: false,
   })
+  const [start, setStart] = useState<null | HTMLElement>(null)
+  const [end, setEnd] = useState<null | HTMLElement>(null)
+
   const visualzePathButton = useRef<HTMLButtonElement>(null)
 
-  // const toggleRun = () => {
-  //   setOptions({
-  //     ...options,
-  //     running: !options.running,
-  //   })
-  // }
+  useEffect(() => {
+    placeStartAndEndPoints()
+  }, [options.distance])
+
+  const placeStartAndEndPoints = async () => {
+    if (start) {
+      start.classList.remove("grid__cell--start")
+    }
+
+    if (end) {
+      end.classList.remove("grid__cell--start")
+    }
+
+    const { grid } = props
+
+    const constant = Math.floor(
+      Math.floor(grid.current.children.length / 2) / 2.5
+    )
+
+    let distance = constant
+    if (options.distance === "far") {
+      distance *= 0
+    } else if (options.distance === "mid") {
+      distance *= 1
+    } else {
+      distance *= 2
+    }
+
+    const width = grid.current.children[0].children.length - 1,
+      height = grid.current.children.length - 1
+    let i = 0 + distance,
+      j = height - distance,
+      startPlaced = false,
+      endPlaced = false
+
+    while (i < j && (!startPlaced || !endPlaced)) {
+      if (!startPlaced) {
+        for (let k = distance; k < width - distance; k++) {
+          const cell = grid.current.children[i].children[k]
+          const cellSet = new Set(cell.classList)
+
+          if (!cellSet.has("grid__cell--wall")) {
+            cell.classList.add("grid__cell--start", "grid__cell--animate-grow")
+            startPlaced = true
+            setStart(cell)
+            break
+          }
+        }
+
+        if (!startPlaced) {
+          i++
+        }
+      }
+
+      if (!endPlaced) {
+        for (let k = width - distance; k >= distance; k--) {
+          const cell = grid.current.children[j].children[k]
+          const cellSet = new Set(cell.classList)
+
+          if (!cellSet.has("grid__cell--wall")) {
+            cell.classList.add("grid__cell--start", "grid__cell--animate-grow")
+            endPlaced = true
+            setEnd(cell)
+            break
+          }
+        }
+
+        if (!endPlaced) {
+          j--
+        }
+      }
+    }
+  }
 
   const generateMaze = async (button: ButtonFormat) => {
     setOptions({
@@ -40,6 +111,7 @@ const Menu: React.FC<Props> = (props) => {
 
     await button.format(props.grid)
     await button.function(props.grid)
+    placeStartAndEndPoints()
 
     setOptions({
       ...options,

@@ -2,11 +2,11 @@ export const generateBounds = (grid: React.MutableRefObject<any>) => {
   return {
     x: {
       start: 0,
-      end: Math.ceil(grid.current.children[0].children.length),
+      end: grid.current.children[0].children.length,
     },
     y: {
       start: 0,
-      end: Math.ceil(grid.current.children.length),
+      end: grid.current.children.length,
     },
   }
 }
