@@ -179,6 +179,13 @@ const Menu: React.FC<Props> = (props) => {
     callback: (button: ButtonFormat) => void
   ) => {
     return buttons.map((button, index) => {
+      let name = options[type]
+
+      if (options.algo && options.algo === options[type]) {
+        const key: keyof ButtonFormat = "name"
+        name = options.algo[key]
+      }
+
       return (
         <li key={index}>
           <Button
@@ -186,7 +193,7 @@ const Menu: React.FC<Props> = (props) => {
             callback={() => callback(button)}
             text={button.name}
             class={
-              options[type] === button.name
+              name === button.name
                 ? "button--accent-filled"
                 : "button--accent-outline"
             }
