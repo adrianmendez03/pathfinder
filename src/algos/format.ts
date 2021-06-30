@@ -1,6 +1,17 @@
-import { generateBounds } from "../utils"
+import { generateBounds } from "./utils"
 
-export const cleanTile = (tile: HTMLElement) => {
+export const resetVisited = (grid: React.MutableRefObject<any>) => {
+  const bounds = generateBounds(grid)
+
+  for (let i = 0; i < bounds.y.end; i++) {
+    for (let j = 0; j < bounds.x.end; j++) {
+      const cell = grid.current.children[i].children[j]
+      cell.dataset.visited = false
+    }
+  }
+}
+
+export const cleanCell = (tile: HTMLElement) => {
   const classes = new Set(tile.classList)
 
   if (classes.has("grid__cell--animate-grow")) {
@@ -27,7 +38,7 @@ export const noWalls = async (grid: React.MutableRefObject<any>) => {
     for (let j = 0; j < bounds.x.end; j++) {
       const tile = grid.current.children[i].children[j]
       tile.dataset.visited = false
-      cleanTile(tile)
+      cleanCell(tile)
       tile.classList.add("grid__cell--path")
     }
   }
@@ -41,7 +52,7 @@ export const seperatedCells = (grid: React.MutableRefObject<any>) => {
     for (let j = 0; j < bounds.x.end; j++) {
       const tile = grid.current.children[i].children[j]
       tile.dataset.visited = false
-      cleanTile(tile)
+      cleanCell(tile)
       // ... if tile is even on its x and y axis make it a path
       // else make it a wall
       if (i % 2 === 0 && j % 2 === 0) {

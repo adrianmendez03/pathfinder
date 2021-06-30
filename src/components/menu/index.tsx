@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react"
-import { cleanTile } from "../../algos/maze/format"
+import { resetVisited } from "../../algos/format"
+import { Cell } from "../../algos/interface"
 
 import Button from "../button"
 import { mazes, algos, distances, ButtonFormat } from "./buttons"
@@ -10,7 +11,7 @@ interface Props {
 }
 
 interface Options {
-  algo: string | null
+  algo: ButtonFormat | null
   maze: string | null
   distance: string
   running: boolean
@@ -23,8 +24,8 @@ const Menu: React.FC<Props> = (props) => {
     distance: "mid",
     running: false,
   })
-  const [start, setStart] = useState<null | HTMLElement>(null)
-  const [end, setEnd] = useState<null | HTMLElement>(null)
+  const [start, setStart] = useState<null | Cell>(null)
+  const [end, setEnd] = useState<null | Cell>(null)
 
   const visualzePathButton = useRef<HTMLButtonElement>(null)
 
@@ -33,21 +34,18 @@ const Menu: React.FC<Props> = (props) => {
   }, [options.distance])
 
   const placeStartAndEndPoints = async () => {
-    if (start) {
-      start.classList.remove("grid__cell--start")
-    }
-
-    if (end) {
-      end.classList.remove("grid__cell--start")
+    if (start && end) {
+      start.cell.classList.remove("grid__cell--start")
+      end.cell.classList.remove("grid__cell--start")
     }
 
     const { grid } = props
-
     const constant = Math.floor(
       Math.floor(grid.current.children.length / 2) / 2.5
     )
 
     let distance = constant
+
     if (options.distance === "far") {
       distance *= 0
     } else if (options.distance === "mid") {
@@ -56,12 +54,12 @@ const Menu: React.FC<Props> = (props) => {
       distance *= 2
     }
 
-    const width = grid.current.children[0].children.length - 1,
-      height = grid.current.children.length - 1
-    let i = 0 + distance,
-      j = height - distance,
-      startPlaced = false,
-      endPlaced = false
+    const width = grid.current.children[0].children.length - 1
+    const height = grid.current.children.length - 1
+    let i = 0 + distance
+    let j = height - distance
+    let startPlaced = false
+    let endPlaced = false
 
     while (i < j && (!startPlaced || !endPlaced)) {
       if (!startPlaced) {
@@ -72,7 +70,15 @@ const Menu: React.FC<Props> = (props) => {
           if (!cellSet.has("grid__cell--wall")) {
             cell.classList.add("grid__cell--start", "grid__cell--animate-grow")
             startPlaced = true
-            setStart(cell)
+            cell.dataset.x = k
+            cell.dataset.y = i
+            setStart({
+              cell,
+              coords: {
+                x: k,
+                y: i,
+              },
+            })
             break
           }
         }
@@ -90,7 +96,16 @@ const Menu: React.FC<Props> = (props) => {
           if (!cellSet.has("grid__cell--wall")) {
             cell.classList.add("grid__cell--start", "grid__cell--animate-grow")
             endPlaced = true
-            setEnd(cell)
+            cell.dataset.x = k
+            cell.dataset.y = i
+            cell.dataset.end = true
+            setEnd({
+              cell,
+              coords: {
+                x: k,
+                y: j,
+              },
+            })
             break
           }
         }
@@ -102,7 +117,25 @@ const Menu: React.FC<Props> = (props) => {
     }
   }
 
-  const generateMaze = async (button: ButtonFormat) => {
+  const visualzePath = async () => {
+    if (options.algo) {
+      setOptions({
+        ...options,
+        running: true,
+      })
+
+      await options.algo.function(props.grid, start)
+
+      setOptions({
+        ...options,
+        running: false,
+      })
+    } else {
+      visualzePathButton.current?.classList.add("button--error-outline")
+    }
+  }
+
+  const handleMazeClick = async (button: ButtonFormat) => {
     setOptions({
       ...options,
       maze: button.name,
@@ -111,7 +144,8 @@ const Menu: React.FC<Props> = (props) => {
 
     await button.format(props.grid)
     await button.function(props.grid)
-    placeStartAndEndPoints()
+    await resetVisited(props.grid)
+    await placeStartAndEndPoints()
 
     setOptions({
       ...options,
@@ -120,27 +154,12 @@ const Menu: React.FC<Props> = (props) => {
     })
   }
 
-  const visualzePath = async () => {
-    // toggleRun()
-
-    if (options.algo) {
-      switch (options.algo) {
-        default:
-          break
-      }
-    } else {
-      visualzePathButton.current!.classList.add("button--error-outline")
-    }
-
-    // toggleRun()
-  }
-
   const handleAlgoClick = (button: ButtonFormat) => {
     visualzePathButton.current!.classList.remove("button--error-outline")
 
     setOptions({
       ...options,
-      algo: button.name,
+      algo: button,
     })
   }
 
@@ -199,7 +218,9 @@ const Menu: React.FC<Props> = (props) => {
           name="algo"
           callback={visualzePath}
           text={
-            options.algo ? `Visualize ${options.algo}` : "Pick an algorithm"
+            options.algo
+              ? `Visualize ${options.algo.name}`
+              : "Pick an algorithm"
           }
           class="button--accent-outline"
           refCallback={visualzePathButton}
@@ -208,7 +229,7 @@ const Menu: React.FC<Props> = (props) => {
       </section>
       <section className="flex--col">
         {algos && renderSection(algos, "algo", handleAlgoClick)}
-        {mazes && renderSection(mazes, "maze", generateMaze)}
+        {mazes && renderSection(mazes, "maze", handleMazeClick)}
         {distances && renderSection(distances, "distance", handleDistanceClick)}
       </section>
     </section>

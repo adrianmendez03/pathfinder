@@ -1,7 +1,8 @@
-import { dfs } from "../../algos/maze/dfs"
+import { dfs as algoDfs } from "../../algos/pathfinding/dfs"
+import { dfs as mazeDfs } from "../../algos/maze/dfs"
 import { recursiveDivision } from "../../algos/maze/recursive"
 import { centeredRecursive } from "../../algos/maze/centeredRecursive"
-import { noWalls, seperatedCells } from "../../algos/maze/format"
+import { noWalls, seperatedCells } from "../../algos/format"
 import { binaryTree } from "../../algos/maze/binaryTree"
 import { sideWinder } from "../../algos/maze/sideWinder"
 
@@ -16,7 +17,7 @@ export const algos = {
   buttons: [
     {
       name: "dfs",
-      function: dfs,
+      function: algoDfs,
     },
   ],
 }
@@ -26,7 +27,7 @@ export const mazes = {
   buttons: [
     {
       name: "randomized dfs",
-      function: dfs,
+      function: mazeDfs,
       format: seperatedCells,
     },
     {

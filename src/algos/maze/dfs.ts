@@ -69,7 +69,7 @@ const getUnvisitedNeighbours = (
   return univisitedNeighbours
 }
 
-export const dfs = async (grid: React.MutableRefObject<any>) => {
+const dfs = async (grid: React.MutableRefObject<any>) => {
   // Create a bounds object to hold the size of the grid
   const bounds = generateBounds(grid)
   // This is an iterative implementation of DFS so a stack is needed
@@ -117,3 +117,5 @@ export const dfs = async (grid: React.MutableRefObject<any>) => {
     currentCell!.cell.classList.remove("grid__cell--current")
   }
 }
+
+export { dfs, getUnvisitedNeighbours }
