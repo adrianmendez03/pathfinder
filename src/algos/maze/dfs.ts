@@ -14,44 +14,45 @@ const getUnvisitedNeighbours = (
       start: number
       end: number
     }
-  }
+  },
+  distance: number
 ) => {
   const top: Cell | undefined =
-    y - 2 >= 0
+    y - distance >= 0
       ? {
-          cell: grid.current.children[y - 2].children[x],
+          cell: grid.current.children[y - distance].children[x],
           coords: {
             x,
-            y: y - 2,
+            y: y - distance,
           },
         }
       : undefined
   const right: Cell | undefined =
-    x + 2 < bounds.x.end
+    x + distance < bounds.x.end
       ? {
-          cell: grid.current.children[y].children[x + 2],
+          cell: grid.current.children[y].children[x + distance],
           coords: {
-            x: x + 2,
+            x: x + distance,
             y,
           },
         }
       : undefined
   const bottom: Cell | undefined =
-    y + 2 < bounds.y.end
+    y + distance < bounds.y.end
       ? {
-          cell: grid.current.children[y + 2].children[x],
+          cell: grid.current.children[y + distance].children[x],
           coords: {
             x,
-            y: y + 2,
+            y: y + distance,
           },
         }
       : undefined
   const left: Cell | undefined =
-    x - 2 >= 0
+    x - distance >= 0
       ? {
-          cell: grid.current.children[y].children[x - 2],
+          cell: grid.current.children[y].children[x - distance],
           coords: {
-            x: x - 2,
+            x: x - distance,
             y,
           },
         }
@@ -60,8 +61,8 @@ const getUnvisitedNeighbours = (
   const neighbours = [top, right, bottom, left]
   const univisitedNeighbours = neighbours.filter((neighbour) => {
     if (neighbour) {
-      const { visited } = neighbour.cell.dataset
-      return visited !== "true"
+      const { visited, type } = neighbour.cell.dataset
+      return visited !== "true" && type === "path"
     }
     return false
   })
@@ -95,7 +96,8 @@ const dfs = async (grid: React.MutableRefObject<any>) => {
       grid,
       currentCell!.coords.x,
       currentCell!.coords.y,
-      bounds
+      bounds,
+      2
     )
     // If the current cell has any neighbours which have not been visited...
     if (unvisitedNeighbours.length > 0) {

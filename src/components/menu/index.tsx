@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react"
-import { resetVisited } from "../../algos/format"
+import { resetPath } from "../../algos/format"
 import { Cell } from "../../algos/interface"
 
 import Button from "../button"
@@ -34,9 +34,12 @@ const Menu: React.FC<Props> = (props) => {
   }, [options.distance])
 
   const placeStartAndEndPoints = async () => {
+    await resetPath(props.grid)
+
     if (start && end) {
       start.cell.classList.remove("grid__cell--start")
       end.cell.classList.remove("grid__cell--start")
+      end.cell.dataset.end = false
     }
 
     const { grid } = props
@@ -144,7 +147,6 @@ const Menu: React.FC<Props> = (props) => {
 
     await button.format(props.grid)
     await button.function(props.grid)
-    await resetVisited(props.grid)
     await placeStartAndEndPoints()
 
     setOptions({

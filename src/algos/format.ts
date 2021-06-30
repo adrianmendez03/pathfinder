@@ -1,6 +1,6 @@
 import { generateBounds } from "./utils"
 
-export const resetVisited = (grid: React.MutableRefObject<any>) => {
+export const resetPath = (grid: React.MutableRefObject<any>) => {
   const bounds = generateBounds(grid)
 
   for (let i = 0; i < bounds.y.end; i++) {
@@ -8,6 +8,7 @@ export const resetVisited = (grid: React.MutableRefObject<any>) => {
       const cell = grid.current.children[i].children[j]
       cell.dataset.visited = false
       cell.classList.remove("grid__cell--animate-grow")
+      cell.classList.remove("grid__cell--start")
     }
   }
 }

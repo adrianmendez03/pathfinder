@@ -27,7 +27,8 @@ const Cell: React.FC<Props> = (props) => {
     <div
       className={`grid__cell grid__cell--round col-${props.index}`}
       ref={cellRef}
-      data-visited={false}
+      data-visited="false"
+      data-type="path"
     ></div>
   )
 }
