@@ -1,4 +1,7 @@
+// PATHFINDER ALGORITHMS
 import { dfs as algoDfs } from "../../algos/pathfinding/dfs"
+import { bfs } from "../../algos/pathfinding/bfs"
+// MAZEGENERATION ALGORITHMS
 import { dfs as mazeDfs } from "../../algos/maze/dfs"
 import { recursiveDivision } from "../../algos/maze/recursive"
 import { centeredRecursive } from "../../algos/maze/centeredRecursive"
@@ -18,6 +21,10 @@ export const algos = {
     {
       name: "dfs",
       function: algoDfs,
+    },
+    {
+      name: "bfs",
+      function: bfs,
     },
   ],
 }

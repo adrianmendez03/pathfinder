@@ -1,8 +1,11 @@
-import { generateBounds } from "../utils"
+import { generateBounds, sleep } from "../utils"
 import { getUnvisitedNeighbours } from "../maze/dfs"
 import { Cell } from "../interface"
 
-export const dfs = (grid: React.MutableRefObject<HTMLElement>, start: Cell) => {
+export const dfs = async (
+  grid: React.MutableRefObject<HTMLElement>,
+  start: Cell
+) => {
   const bounds = generateBounds(grid)
   const stack: Cell[] = []
   stack.push(start)
@@ -16,11 +19,14 @@ export const dfs = (grid: React.MutableRefObject<HTMLElement>, start: Cell) => {
       bounds,
       1
     )
-    console.log(unvisitedNeighbours)
     for (let i = 0; i < unvisitedNeighbours.length; i++) {
       const neighbour = unvisitedNeighbours[i]
       if (neighbour) {
-        neighbour.cell.classList.add("grid__cell--start")
+        neighbour.cell.classList.add(
+          "grid__cell--start",
+          "grid__cell--animate-grow"
+        )
+        await sleep(25)
         if (neighbour.cell.dataset.end === "true") {
           console.log(true)
           return

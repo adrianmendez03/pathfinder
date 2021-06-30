@@ -127,6 +127,7 @@ const Menu: React.FC<Props> = (props) => {
         running: true,
       })
 
+      await placeStartAndEndPoints()
       await options.algo.function(props.grid, start)
 
       setOptions({
