@@ -2,6 +2,7 @@ import {
   generateBounds,
   randomInteger,
   randomIntegerBetweenTwoValues,
+  createWall,
   sleep,
 } from "../utils"
 
@@ -60,11 +61,11 @@ export const recursiveDivision = async (
     // If location of the cell is not equal to the gap index, form a wall.
     if (wallDirection === "horizontal") {
       if (x.start + i !== gapIndex) {
-        cell.classList.add("grid__cell--wall", "grid__cell--animate-grow")
+        createWall(cell)
       }
     } else {
       if (y.start + i !== gapIndex) {
-        cell.classList.add("grid__cell--wall", "grid__cell--animate-grow")
+        createWall(cell)
       }
     }
     await sleep(25)

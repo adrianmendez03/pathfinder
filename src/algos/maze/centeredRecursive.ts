@@ -44,10 +44,12 @@ export const centeredRecursive = async (
     if (wallDirection === "horizontal") {
       if (x.start + i !== gapIndex) {
         cell.classList.add("grid__cell--wall", "grid__cell--animate-grow")
+        cell.dataset.type = "wall"
       }
     } else {
       if (y.start + i !== gapIndex) {
         cell.classList.add("grid__cell--wall", "grid__cell--animate-grow")
+        cell.dataset.type = "wall"
       }
     }
     await sleep(25)
