@@ -7,11 +7,15 @@ export const dfs = async (
   start: Cell
 ) => {
   const bounds = generateBounds(grid)
+  // Add the starting cell to a stack.
   const stack: Cell[] = []
   stack.push(start)
+  // While the stack is not empty...
   while (stack.length > 0) {
+    // ... get the node at the top of the stack and mark it as visited.
     const topNode = stack.pop()
     topNode!.cell.dataset.visited = true
+    // Fetch all of its unvisited neighbours.
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
       topNode!.coords.x,
@@ -19,6 +23,7 @@ export const dfs = async (
       bounds,
       1
     )
+    // For every non visited neighbour...
     for (let i = 0; i < unvisitedNeighbours.length; i++) {
       const neighbour = unvisitedNeighbours[i]
       if (neighbour) {
@@ -27,10 +32,15 @@ export const dfs = async (
           "grid__cell--animate-grow"
         )
         await sleep(25)
+        // ... if the neighbour is the target node...
         if (neighbour.cell.dataset.end === "true") {
+          // ... return true
           console.log(true)
           return
-        } else {
+        }
+        // Else ...
+        else {
+          // ... push the neighbour to the stack.
           stack.push(neighbour)
         }
       }
