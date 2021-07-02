@@ -11,10 +11,7 @@ const Row: React.FC<Props> = (props) => {
   return (
     <div className={`flex--row grid__row row-${props.index}`}>
       {new Array(props.cols).fill(true).map((el, index) => {
-        const type = "path"
-        return (
-          <Cell key={index} index={index} type={type} rowIndex={props.index} />
-        )
+        return <Cell key={index} index={index} rowIndex={props.index} />
       })}
     </div>
   )
