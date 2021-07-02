@@ -32,6 +32,7 @@ const Menu: React.FC<Props> = (props) => {
   useEffect(() => {
     if (props.grid) {
       placeStartAndEndPoints()
+      new ResizeObserver(() => placeStartAndEndPoints()).observe(props.grid)
     }
   }, [options.distance, props.grid])
 

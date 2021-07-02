@@ -6,6 +6,7 @@ import "./Grid.css"
 
 interface Props {
   gridRef: (gridNode: HTMLElement) => void
+  grid: HTMLElement | null
 }
 interface Size {
   rows: number
@@ -21,14 +22,21 @@ const Grid: React.FC<Props> = (props) => {
       return Math.floor(Math.floor(value / 20) / 2) * 2 + 1
     }
 
-    if (grid.current) {
-      const { clientHeight, clientWidth } = grid.current
+    const updateSize = (height: number, width: number) => {
       setSize({
-        rows: generateLength(clientHeight),
-        cols: generateLength(clientWidth),
+        rows: generateLength(height),
+        cols: generateLength(width),
       })
     }
-  }, [grid])
+
+    if (grid.current) {
+      updateSize(grid.current.clientHeight, grid.current.clientWidth)
+    } else if (props.grid) {
+      new ResizeObserver(() =>
+        updateSize(props.grid!.clientHeight, props.grid!.clientWidth)
+      ).observe(props.grid)
+    }
+  }, [grid, props.grid])
 
   return size ? (
     <div className="grid__container">

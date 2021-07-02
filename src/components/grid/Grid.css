@@ -3,7 +3,7 @@
 .grid {
   border: 4px solid var(--secondary);
   background-color: var(--idle);
-  width: 310px;
+  /* width: 310px; */
   height: 348px;
   margin: auto;
   overflow: hidden;
@@ -50,15 +50,15 @@
   }
 }
 
-@media only screen and (min-width: 375px) {
+/* @media only screen and (min-width: 375px) {
   .grid {
     width: 365px;
   }
-}
+} */
 
 @media only screen and (min-width: 768px) {
   .grid {
-    width: 568px;
+    /* width: 568px; */
     height: 508px;
   }
 }
@@ -66,5 +66,8 @@
 @media only screen and (min-width: 1024px) {
   .grid__container {
     margin: auto 0;
+  }
+  .grid {
+    width: 568px;
   }
 }
