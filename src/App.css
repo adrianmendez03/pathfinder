@@ -9,13 +9,18 @@
   font-weight: bold;
 }
 
+html {
+  background-color: var(--primary);
+}
+
 #app {
   height: 100vh;
+  max-width: 1220px;
+  margin: auto;
   padding: 5px;
-  background-color: var(--primary);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 ul {
@@ -37,4 +42,17 @@ footer {
 
 footer a {
   color: var(--secondary);
+}
+
+@media only screen and (min-width: 768px) {
+  #app {
+    padding: 5px 100px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  #app {
+    padding: 5px;
+    flex-direction: row-reverse;
+  }
 }

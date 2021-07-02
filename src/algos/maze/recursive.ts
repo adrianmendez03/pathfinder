@@ -68,7 +68,7 @@ export const recursiveDivision = async (
         createWall(cell)
       }
     }
-    await sleep(25)
+    await sleep(10)
   }
   // If the divide is horizontal recurse on the top and bottom sections
   // Else recurse on the left and right sides

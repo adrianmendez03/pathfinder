@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react"
 
 interface Props {
   index: number
-  createWalls: boolean
   type: string
   rowIndex: number
 }

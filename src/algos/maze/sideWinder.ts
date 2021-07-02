@@ -32,7 +32,7 @@ export const sideWinder = async (grid: React.MutableRefObject<any>) => {
       // Mark the current tile.
       const cell = grid.current.children[i].children[j]
       cell.classList.add("grid__cell--current")
-      await sleep(25)
+      await sleep(10)
       // If the tile is in the first row...
       if (i === 0 && j < width - 1) {
         // ... breakdown the west wall.

@@ -52,7 +52,7 @@ export const centeredRecursive = async (
         cell.dataset.type = "wall"
       }
     }
-    await sleep(25)
+    await sleep(10)
   }
 
   if (wallDirection === "horizontal") {

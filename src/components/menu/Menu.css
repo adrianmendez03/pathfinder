@@ -32,3 +32,11 @@
   width: max-content;
   padding: 0 12px;
 }
+
+@media only screen and (min-width: 1024px) {
+  .menu {
+    margin: auto 0;
+    width: 368px;
+    height: min-content;
+  }
+}

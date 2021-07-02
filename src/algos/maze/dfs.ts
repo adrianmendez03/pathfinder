@@ -91,7 +91,7 @@ const dfs = async (grid: React.MutableRefObject<any>) => {
     // ... pop a cell from the stack and make it a current cell
     const currentCell: Cell | undefined = stack.pop()
     currentCell!.cell.classList.add("grid__cell--current")
-    await sleep(25)
+    await sleep(10)
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
       currentCell!.coords.x,

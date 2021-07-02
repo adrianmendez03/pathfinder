@@ -35,7 +35,7 @@ export const binaryTree = async (grid: React.MutableRefObject<any>) => {
       // ... mark the current tile.
       const cell = grid.current.children[i].children[j]
       cell.classList.add("grid__cell--current")
-      await sleep(25)
+      await sleep(10)
       // Check if north or west neighbours exist...
       const neighbours = fetchNeighbours(grid, bounds, j, i)
       // ... if both exists...

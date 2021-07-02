@@ -1,4 +1,4 @@
-export const generateBounds = (grid: React.MutableRefObject<any>) => {
+export const generateBounds = (grid: React.MutableRefObject<HTMLElement>) => {
   return {
     x: {
       start: 0,
