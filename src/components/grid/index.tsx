@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 
 import Row from "./Row"
 import Legend from "./legend"
@@ -6,7 +6,6 @@ import "./Grid.css"
 
 interface Props {
   gridRef: (gridNode: HTMLElement) => void
-  grid: HTMLElement | null
 }
 interface Size {
   rows: number
@@ -15,20 +14,21 @@ interface Size {
 
 const Grid: React.FC<Props> = (props) => {
   const [size, setSize] = useState<Size | null>(null)
+  const grid = useRef<any>()
 
   useEffect(() => {
     const generateLength = (value: number) => {
       return Math.floor(Math.floor(value / 20) / 2) * 2 + 1
     }
 
-    if (props.grid) {
-      const { clientHeight, clientWidth } = props.grid
+    if (grid.current) {
+      const { clientHeight, clientWidth } = grid.current
       setSize({
         rows: generateLength(clientHeight),
         cols: generateLength(clientWidth),
       })
     }
-  }, [props.grid])
+  }, [grid])
 
   return size ? (
     <div className="grid__container">
@@ -41,7 +41,7 @@ const Grid: React.FC<Props> = (props) => {
     </div>
   ) : (
     <div className="grid__container">
-      <section ref={props.gridRef} className="grid rounded-corners">
+      <section ref={grid} className="grid rounded-corners">
         Loading
       </section>
       <Legend />

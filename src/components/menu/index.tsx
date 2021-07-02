@@ -33,10 +33,9 @@ const Menu: React.FC<Props> = (props) => {
     if (props.grid) {
       placeStartAndEndPoints()
     }
-  }, [options.distance])
+  }, [options.distance, props.grid])
 
   const placeStartAndEndPoints = async () => {
-    console.log("blah")
     await resetPath(props.grid!)
 
     if (start && end) {
@@ -121,7 +120,6 @@ const Menu: React.FC<Props> = (props) => {
         }
       }
     }
-    console.log(startPlaced || endPlaced)
   }
 
   const visualzePath = async () => {

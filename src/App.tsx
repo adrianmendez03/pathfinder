@@ -13,7 +13,7 @@ const App: React.FC = () => {
 
   return (
     <div id="app">
-      <Grid gridRef={connectGridRef} grid={grid} />
+      <Grid gridRef={connectGridRef} />
       <Menu grid={grid} />
     </div>
   )
