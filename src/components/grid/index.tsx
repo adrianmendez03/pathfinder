@@ -8,38 +8,40 @@ interface Props {
   gridRef: React.MutableRefObject<HTMLElement | null>
 }
 interface Size {
-  height: number
-  width: number
+  rows: number
+  cols: number
 }
 
 const Grid: React.FC<Props> = (props) => {
   const [size, setSize] = useState<Size | null>(null)
 
   useEffect(() => {
-    console.log("blah")
-    const { clientHeight, clientWidth } = props.gridRef.current!
-    if (clientHeight && clientWidth) {
+    const generateLength = (value: number) => {
+      return Math.floor(Math.floor(value / 20) / 2) * 2 + 1
+    }
+
+    if (props.gridRef.current) {
+      const { clientHeight, clientWidth } = props.gridRef.current
       setSize({
-        height: clientHeight,
-        width: clientWidth,
+        rows: generateLength(clientHeight),
+        cols: generateLength(clientWidth),
       })
     }
   }, [props.gridRef])
 
-  const generate = (value: number) => {
-    return Math.floor(Math.floor(value / 20) / 2) * 2 + 1
-  }
-
-  return (
+  return size ? (
     <div className="grid__container">
       <section ref={props.gridRef} className="grid rounded-corners">
-        {size
-          ? new Array(generate(size.height)).fill(true).map((el, index) => {
-              return (
-                <Row key={index} index={index} cols={generate(size.width)} />
-              )
-            })
-          : "Loading"}
+        {new Array(size.rows).fill(true).map((el, index) => {
+          return <Row key={index} index={index} cols={size.cols} />
+        })}
+      </section>
+      <Legend />
+    </div>
+  ) : (
+    <div className="grid__container">
+      <section ref={props.gridRef} className="grid rounded-corners">
+        Loading
       </section>
       <Legend />
     </div>

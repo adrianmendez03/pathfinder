@@ -2,7 +2,6 @@ import React from "react"
 
 interface Props {
   index: number
-  rowIndex: number
 }
 
 const Cell: React.FC<Props> = (props) => {

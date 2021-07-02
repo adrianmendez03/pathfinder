@@ -30,12 +30,13 @@ const Menu: React.FC<Props> = (props) => {
   const visualzePathButton = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (props.grid.current.children[0]) {
+    if (props.grid.current && props.grid.current.children.length > 0) {
       placeStartAndEndPoints()
     }
   }, [options.distance])
 
   const placeStartAndEndPoints = async () => {
+    console.log("blah")
     await resetPath(props.grid)
 
     if (start && end) {
@@ -120,6 +121,7 @@ const Menu: React.FC<Props> = (props) => {
         }
       }
     }
+    console.log(startPlaced || endPlaced)
   }
 
   const visualzePath = async () => {
