@@ -2,10 +2,7 @@ import { generateBounds, sleep } from "../utils"
 import { getUnvisitedNeighbours } from "../maze/dfs"
 import { Cell } from "../interface"
 
-export const dfs = async (
-  grid: React.MutableRefObject<HTMLElement>,
-  start: Cell
-) => {
+export const dfs = async (grid: HTMLElement, start: Cell) => {
   const bounds = generateBounds(grid)
   // Add the starting cell to a stack.
   const stack: Cell[] = []

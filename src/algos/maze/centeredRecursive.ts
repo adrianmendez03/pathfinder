@@ -11,7 +11,7 @@ const chooseWallDirection = (width: number, height: number): string => {
 }
 
 export const centeredRecursive = async (
-  grid: React.MutableRefObject<any>,
+  grid: HTMLElement,
   bounds = generateBounds(grid)
 ) => {
   const { x, y } = bounds
@@ -39,8 +39,8 @@ export const centeredRecursive = async (
   for (let i = 0; i < wallLength; i++) {
     const cell =
       wallDirection === "horizontal"
-        ? grid.current.children[wallIndex].children[x.start + i]
-        : grid.current.children[y.start + i].children[wallIndex]
+        ? (grid.children[wallIndex].children[x.start + i] as HTMLElement)
+        : (grid.children[y.start + i].children[wallIndex] as HTMLElement)
     if (wallDirection === "horizontal") {
       if (x.start + i !== gapIndex) {
         cell.classList.add("grid__cell--wall", "grid__cell--animate-grow")

@@ -2,7 +2,7 @@ import { Coords, Cell } from "../interface"
 import { generateBounds, randomInteger, breakdownWall, sleep } from "../utils"
 
 const getUnvisitedNeighbours = (
-  grid: React.MutableRefObject<any>,
+  grid: HTMLElement,
   x: number,
   y: number,
   bounds: {
@@ -20,7 +20,7 @@ const getUnvisitedNeighbours = (
   const top: Cell | undefined =
     y - distance >= 0
       ? {
-          cell: grid.current.children[y - distance].children[x],
+          cell: grid.children[y - distance].children[x],
           coords: {
             x,
             y: y - distance,
@@ -30,7 +30,7 @@ const getUnvisitedNeighbours = (
   const right: Cell | undefined =
     x + distance < bounds.x.end
       ? {
-          cell: grid.current.children[y].children[x + distance],
+          cell: grid.children[y].children[x + distance],
           coords: {
             x: x + distance,
             y,
@@ -40,7 +40,7 @@ const getUnvisitedNeighbours = (
   const bottom: Cell | undefined =
     y + distance < bounds.y.end
       ? {
-          cell: grid.current.children[y + distance].children[x],
+          cell: grid.children[y + distance].children[x],
           coords: {
             x,
             y: y + distance,
@@ -50,7 +50,7 @@ const getUnvisitedNeighbours = (
   const left: Cell | undefined =
     x - distance >= 0
       ? {
-          cell: grid.current.children[y].children[x - distance],
+          cell: grid.children[y].children[x - distance],
           coords: {
             x: x - distance,
             y,
@@ -70,7 +70,7 @@ const getUnvisitedNeighbours = (
   return univisitedNeighbours
 }
 
-const dfs = async (grid: React.MutableRefObject<any>) => {
+const dfs = async (grid: HTMLElement) => {
   // Create a bounds object to hold the size of the grid
   const bounds = generateBounds(grid)
   // This is an iterative implementation of DFS so a stack is needed
@@ -81,7 +81,7 @@ const dfs = async (grid: React.MutableRefObject<any>) => {
     y: randomInteger(Math.ceil(bounds.y.end) / 2) * 2,
   }
   const initialCell: Cell = {
-    cell: grid.current.children[coords.y].children[coords.x],
+    cell: grid.children[coords.y].children[coords.x],
     coords: coords,
   }
   initialCell.cell.dataset.visited = true
@@ -107,10 +107,11 @@ const dfs = async (grid: React.MutableRefObject<any>) => {
       const randomNeighbour =
         unvisitedNeighbours[randomInteger(unvisitedNeighbours.length)]
       // ... remove the wall between the current cell and the chosen cell...
-      const wall =
-        grid.current.children[
-          (currentCell!.coords.y + randomNeighbour!.coords.y) / 2
-        ].children[(currentCell!.coords.x + randomNeighbour!.coords.x) / 2]
+      const wall = grid.children[
+        (currentCell!.coords.y + randomNeighbour!.coords.y) / 2
+      ].children[
+        (currentCell!.coords.x + randomNeighbour!.coords.x) / 2
+      ] as HTMLElement
       breakdownWall(wall)
       // ... mark the neighbour as visited and push it into the stack.
       randomNeighbour!.cell.dataset.visited = true

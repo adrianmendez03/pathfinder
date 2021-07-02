@@ -17,7 +17,7 @@ const chooseWallDirection = (width: number, height: number): string => {
 }
 
 export const recursiveDivision = async (
-  grid: React.MutableRefObject<any>,
+  grid: HTMLElement,
   bounds = generateBounds(grid)
 ) => {
   // Get the bounds that we're working with.
@@ -56,8 +56,8 @@ export const recursiveDivision = async (
     // Else the cell's location is [wallIndex, y.start plus the current iteration]
     const cell =
       wallDirection === "horizontal"
-        ? grid.current.children[wallIndex].children[x.start + i]
-        : grid.current.children[y.start + i].children[wallIndex]
+        ? (grid.children[wallIndex].children[x.start + i] as HTMLElement)
+        : (grid.children[y.start + i].children[wallIndex] as HTMLElement)
     // If location of the cell is not equal to the gap index, form a wall.
     if (wallDirection === "horizontal") {
       if (x.start + i !== gapIndex) {

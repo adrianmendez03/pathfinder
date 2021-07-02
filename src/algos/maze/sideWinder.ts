@@ -1,7 +1,7 @@
 import { breakdownWall, generateBounds, randomInteger, sleep } from "../utils"
 
 const breakRandomCeiling = async (
-  grid: React.MutableRefObject<any>,
+  grid: HTMLElement,
   currentRun: any[],
   coords: number[]
 ) => {
@@ -11,14 +11,16 @@ const breakRandomCeiling = async (
     const randomIndex = randomInteger(currentRun.length)
     const randomValue = currentRun[randomIndex]
     breakdownWall(
-      grid.current.children[randomValue[1] - 1].children[randomValue[0]]
+      grid.children[randomValue[1] - 1].children[randomValue[0]] as HTMLElement
     )
   } else {
-    breakdownWall(grid.current.children[coords[1] - 1].children[coords[0]])
+    breakdownWall(
+      grid.children[coords[1] - 1].children[coords[0]] as HTMLElement
+    )
   }
 }
 
-export const sideWinder = async (grid: React.MutableRefObject<any>) => {
+export const sideWinder = async (grid: HTMLElement) => {
   // Create some variables for convenience
   const bounds = generateBounds(grid)
   const { x, y } = bounds
@@ -30,13 +32,13 @@ export const sideWinder = async (grid: React.MutableRefObject<any>) => {
     let currentRun: any[] = []
     for (let j = 0; j < width; j += 2) {
       // Mark the current tile.
-      const cell = grid.current.children[i].children[j]
+      const cell = grid.children[i].children[j]
       cell.classList.add("grid__cell--current")
       await sleep(10)
       // If the tile is in the first row...
       if (i === 0 && j < width - 1) {
         // ... breakdown the west wall.
-        breakdownWall(grid.current.children[i].children[j + 1])
+        breakdownWall(grid.children[i].children[j + 1] as HTMLElement)
       }
       // If it is the last tile in the row...
       else if (j === width - 1) {
@@ -52,7 +54,7 @@ export const sideWinder = async (grid: React.MutableRefObject<any>) => {
         // Flip a coin to decide if you'll continue the segment..
         if (randomInteger(2)) {
           // ... if segment continues, break the west wall.
-          breakdownWall(grid.current.children[i].children[j + 1])
+          breakdownWall(grid.children[i].children[j + 1] as HTMLElement)
         }
         // Else...
         else {

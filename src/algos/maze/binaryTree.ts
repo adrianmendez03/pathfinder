@@ -3,7 +3,7 @@ import { Bounds } from "../interface"
 
 // Function to check if North or West Neighbours exist.
 const fetchNeighbours = (
-  grid: React.MutableRefObject<any>,
+  grid: HTMLElement,
   bounds: Bounds,
   x: number,
   y: number
@@ -23,7 +23,7 @@ const fetchNeighbours = (
   return neighbours
 }
 
-export const binaryTree = async (grid: React.MutableRefObject<any>) => {
+export const binaryTree = async (grid: HTMLElement) => {
   // Create some variables for convenience
   const bounds = generateBounds(grid)
   const { x, y } = bounds
@@ -33,7 +33,7 @@ export const binaryTree = async (grid: React.MutableRefObject<any>) => {
   for (let i = 0; i < height; i += 2) {
     for (let j = 0; j < width; j += 2) {
       // ... mark the current tile.
-      const cell = grid.current.children[i].children[j]
+      const cell = grid.children[i].children[j]
       cell.classList.add("grid__cell--current")
       await sleep(10)
       // Check if north or west neighbours exist...
@@ -43,26 +43,26 @@ export const binaryTree = async (grid: React.MutableRefObject<any>) => {
         // ... flip a coin, if heads ...
         if (randomInteger(2)) {
           // ... connect cell to north neighbour.
-          const northNeighbour = grid.current.children[i - 1].children[j]
+          const northNeighbour = grid.children[i - 1].children[j] as HTMLElement
           breakdownWall(northNeighbour)
         }
         // If tails ...
         else {
           // ... connect cell to west neighbour
-          const westNeighbour = grid.current.children[i].children[j - 1]
+          const westNeighbour = grid.children[i].children[j - 1] as HTMLElement
           breakdownWall(westNeighbour)
         }
       }
       // If only north exists...
       else if (neighbours.north) {
         // ... connect cell to north neighbour.
-        const northNeighbour = grid.current.children[i - 1].children[j]
+        const northNeighbour = grid.children[i - 1].children[j] as HTMLElement
         breakdownWall(northNeighbour)
       }
       // If only west exists...
       else if (neighbours.west) {
         // ... connect cell to west neighbour.
-        const westNeighbour = grid.current.children[i].children[j - 1]
+        const westNeighbour = grid.children[i].children[j - 1] as HTMLElement
         breakdownWall(westNeighbour)
       }
       // Unmark the current cell

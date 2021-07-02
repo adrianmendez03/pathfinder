@@ -1,12 +1,12 @@
 import { generateBounds } from "./utils"
 
-export const resetPath = (grid: React.MutableRefObject<any>) => {
+export const resetPath = (grid: HTMLElement) => {
   const bounds = generateBounds(grid)
 
   for (let i = 0; i < bounds.y.end; i++) {
     for (let j = 0; j < bounds.x.end; j++) {
-      const cell = grid.current.children[i].children[j]
-      cell.dataset.visited = false
+      const cell = grid.children[i].children[j] as HTMLElement
+      cell.dataset.visited = "false"
       cell.classList.remove("grid__cell--animate-grow")
       cell.classList.remove("grid__cell--start")
     }
@@ -33,13 +33,13 @@ export const cleanCell = (tile: HTMLElement) => {
   }
 }
 
-export const noWalls = async (grid: React.MutableRefObject<any>) => {
+export const noWalls = async (grid: HTMLElement) => {
   const bounds = generateBounds(grid)
 
   for (let i = 0; i < bounds.y.end; i++) {
     for (let j = 0; j < bounds.x.end; j++) {
-      const cell = grid.current.children[i].children[j]
-      cell.dataset.visited = false
+      const cell = grid.children[i].children[j] as HTMLElement
+      cell.dataset.visited = "false"
       cleanCell(cell)
       cell.classList.add("grid__cell--path")
       cell.dataset.type = "path"
@@ -47,14 +47,14 @@ export const noWalls = async (grid: React.MutableRefObject<any>) => {
   }
 }
 
-export const seperatedCells = (grid: React.MutableRefObject<any>) => {
+export const seperatedCells = (grid: HTMLElement) => {
   // Create our bounds.
   const bounds = generateBounds(grid)
   // For every cell in the grid...
   for (let i = 0; i < bounds.y.end; i++) {
     for (let j = 0; j < bounds.x.end; j++) {
-      const cell = grid.current.children[i].children[j]
-      cell.dataset.visited = false
+      const cell = grid.children[i].children[j] as HTMLElement
+      cell.dataset.visited = "false"
       cleanCell(cell)
       // ... if cell is even on its x and y axis make it a path
       // else make it a wall

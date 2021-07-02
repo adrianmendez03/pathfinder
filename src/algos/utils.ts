@@ -1,12 +1,12 @@
-export const generateBounds = (grid: React.MutableRefObject<HTMLElement>) => {
+export const generateBounds = (grid: HTMLElement) => {
   return {
     x: {
       start: 0,
-      end: grid.current.children[0].children.length,
+      end: grid.children[0].children.length,
     },
     y: {
       start: 0,
-      end: grid.current.children.length,
+      end: grid.children.length,
     },
   }
 }

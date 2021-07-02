@@ -5,7 +5,8 @@ import Legend from "./legend"
 import "./Grid.css"
 
 interface Props {
-  gridRef: React.MutableRefObject<HTMLElement | null>
+  gridRef: (gridNode: HTMLElement) => void
+  grid: HTMLElement | null
 }
 interface Size {
   rows: number
@@ -20,14 +21,14 @@ const Grid: React.FC<Props> = (props) => {
       return Math.floor(Math.floor(value / 20) / 2) * 2 + 1
     }
 
-    if (props.gridRef.current) {
-      const { clientHeight, clientWidth } = props.gridRef.current
+    if (props.grid) {
+      const { clientHeight, clientWidth } = props.grid
       setSize({
         rows: generateLength(clientHeight),
         cols: generateLength(clientWidth),
       })
     }
-  }, [props.gridRef])
+  }, [props.grid])
 
   return size ? (
     <div className="grid__container">

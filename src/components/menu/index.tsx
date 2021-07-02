@@ -7,7 +7,7 @@ import { mazes, algos, distances, ButtonFormat } from "./buttons"
 import "./Menu.css"
 
 interface Props {
-  grid: React.MutableRefObject<any>
+  grid: HTMLElement | null
 }
 
 interface Options {
@@ -30,14 +30,14 @@ const Menu: React.FC<Props> = (props) => {
   const visualzePathButton = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
-    if (props.grid.current && props.grid.current.children.length > 0) {
+    if (props.grid) {
       placeStartAndEndPoints()
     }
   }, [options.distance])
 
   const placeStartAndEndPoints = async () => {
     console.log("blah")
-    await resetPath(props.grid)
+    await resetPath(props.grid!)
 
     if (start && end) {
       start.cell.classList.remove("grid__cell--start")
@@ -47,7 +47,7 @@ const Menu: React.FC<Props> = (props) => {
 
     const { grid } = props
     const constant = Math.floor(
-      Math.floor(grid.current.children.length / 2) / 2.5
+      Math.floor(props.grid!.children.length / 2) / 2.5
     )
 
     let distance = constant
@@ -60,8 +60,8 @@ const Menu: React.FC<Props> = (props) => {
       distance *= 2
     }
 
-    const width = grid.current.children[0].children.length - 1
-    const height = grid.current.children.length - 1
+    const width = grid!.children[0].children.length - 1
+    const height = grid!.children.length - 1
     let i = 0 + distance
     let j = height - distance
     let startPlaced = false
@@ -70,14 +70,14 @@ const Menu: React.FC<Props> = (props) => {
     while (i < j && (!startPlaced || !endPlaced)) {
       if (!startPlaced) {
         for (let k = distance; k < width - distance; k++) {
-          const cell = grid.current.children[i].children[k]
+          const cell = grid!.children[i].children[k] as HTMLElement
           const cellSet = new Set(cell.classList)
 
           if (!cellSet.has("grid__cell--wall")) {
             cell.classList.add("grid__cell--start", "grid__cell--animate-grow")
             startPlaced = true
-            cell.dataset.x = k
-            cell.dataset.y = i
+            cell.dataset.x = k.toString()
+            cell.dataset.y = i.toString()
             setStart({
               cell,
               coords: {
@@ -96,15 +96,15 @@ const Menu: React.FC<Props> = (props) => {
 
       if (!endPlaced) {
         for (let k = width - distance; k >= distance; k--) {
-          const cell = grid.current.children[j].children[k]
+          const cell = grid!.children[j].children[k] as HTMLElement
           const cellSet = new Set(cell.classList)
 
           if (!cellSet.has("grid__cell--wall")) {
             cell.classList.add("grid__cell--start", "grid__cell--animate-grow")
             endPlaced = true
-            cell.dataset.x = k
-            cell.dataset.y = i
-            cell.dataset.end = true
+            cell.dataset.x = k.toString()
+            cell.dataset.y = i.toString()
+            cell.dataset.end = "true"
             setEnd({
               cell,
               coords: {

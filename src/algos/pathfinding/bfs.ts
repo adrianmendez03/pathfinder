@@ -2,7 +2,7 @@ import { Cell } from "../interface"
 import { getUnvisitedNeighbours } from "../maze/dfs"
 import { generateBounds, sleep } from "../utils"
 
-export const bfs = async (grid: React.MutableRefObject<any>, start: Cell) => {
+export const bfs = async (grid: HTMLElement, start: Cell) => {
   const bounds = generateBounds(grid)
   // Add the start to the queue and mark it as visited.
   start.cell.dataset.visited = true
