@@ -3,6 +3,7 @@ import { getUnvisitedNeighbours } from "../maze/dfs"
 import { Cell } from "../interface"
 
 export const dfs = async (grid: HTMLElement, start: Cell) => {
+  const parentMap = {}
   const bounds = generateBounds(grid)
   // Add the starting cell to a stack.
   const stack: Cell[] = []
@@ -11,7 +12,7 @@ export const dfs = async (grid: HTMLElement, start: Cell) => {
   while (stack.length > 0) {
     // ... get the node at the top of the stack and mark it as visited.
     const topNode = stack.pop()
-    topNode!.cell.dataset.visited = true
+    topNode!.cell.dataset.visited = "true"
     // Fetch all of its unvisited neighbours.
     const unvisitedNeighbours = getUnvisitedNeighbours(
       grid,
@@ -39,6 +40,7 @@ export const dfs = async (grid: HTMLElement, start: Cell) => {
         else {
           // ... push the neighbour to the stack.
           stack.push(neighbour)
+          console.log(neighbour.cell)
         }
       }
     }

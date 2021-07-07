@@ -42,7 +42,7 @@ const Menu: React.FC<Props> = (props) => {
     if (start && end) {
       start.cell.classList.remove("grid__cell--start")
       end.cell.classList.remove("grid__cell--start")
-      end.cell.dataset.end = false
+      end.cell.dataset.end = "false"
     }
 
     const { grid } = props

@@ -5,7 +5,7 @@ import { generateBounds, sleep } from "../utils"
 export const bfs = async (grid: HTMLElement, start: Cell) => {
   const bounds = generateBounds(grid)
   // Add the start to the queue and mark it as visited.
-  start.cell.dataset.visited = true
+  start.cell.dataset.visited = "true"
   const q = []
   q.push(start)
   // While the queue is not empty...
@@ -31,7 +31,7 @@ export const bfs = async (grid: HTMLElement, start: Cell) => {
             "grid__cell--animate-grow"
           )
           // ... mark it as visited.
-          neighbour.cell.dataset.visited = true
+          neighbour.cell.dataset.visited = "true"
           // If the neighbour is the target cell ...
           if (neighbour.cell.dataset.end === "true") {
             // ... return true

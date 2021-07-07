@@ -20,7 +20,7 @@ const getUnvisitedNeighbours = (
   const top: Cell | undefined =
     y - distance >= 0
       ? {
-          cell: grid.children[y - distance].children[x],
+          cell: grid.children[y - distance].children[x] as HTMLElement,
           coords: {
             x,
             y: y - distance,
@@ -30,7 +30,7 @@ const getUnvisitedNeighbours = (
   const right: Cell | undefined =
     x + distance < bounds.x.end
       ? {
-          cell: grid.children[y].children[x + distance],
+          cell: grid.children[y].children[x + distance] as HTMLElement,
           coords: {
             x: x + distance,
             y,
@@ -40,7 +40,7 @@ const getUnvisitedNeighbours = (
   const bottom: Cell | undefined =
     y + distance < bounds.y.end
       ? {
-          cell: grid.children[y + distance].children[x],
+          cell: grid.children[y + distance].children[x] as HTMLElement,
           coords: {
             x,
             y: y + distance,
@@ -50,7 +50,7 @@ const getUnvisitedNeighbours = (
   const left: Cell | undefined =
     x - distance >= 0
       ? {
-          cell: grid.children[y].children[x - distance],
+          cell: grid.children[y].children[x - distance] as HTMLElement,
           coords: {
             x: x - distance,
             y,
@@ -81,10 +81,10 @@ const dfs = async (grid: HTMLElement) => {
     y: randomInteger(Math.ceil(bounds.y.end) / 2) * 2,
   }
   const initialCell: Cell = {
-    cell: grid.children[coords.y].children[coords.x],
+    cell: grid.children[coords.y].children[coords.x] as HTMLElement,
     coords: coords,
   }
-  initialCell.cell.dataset.visited = true
+  initialCell.cell.dataset.visited = "true"
   stack.push(initialCell)
   // While the stack is not not empty...
   while (stack.length > 0) {
@@ -114,7 +114,7 @@ const dfs = async (grid: HTMLElement) => {
       ] as HTMLElement
       breakdownWall(wall)
       // ... mark the neighbour as visited and push it into the stack.
-      randomNeighbour!.cell.dataset.visited = true
+      randomNeighbour!.cell.dataset.visited = "true"
       stack.push(randomNeighbour)
     }
     currentCell!.cell.classList.remove("grid__cell--current")

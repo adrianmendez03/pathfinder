@@ -1,5 +1,5 @@
 export interface Cell {
-  cell: any
+  cell: HTMLElement
   coords: Coords
 }
 
