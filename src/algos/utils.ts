@@ -34,6 +34,25 @@ export const breakdownWall = (cell: HTMLElement) => {
   cell.dataset.type = "path"
 }
 
+export const generateHTMLElement = (
+  grid: HTMLElement,
+  coords: string
+): HTMLElement => {
+  const coordsArr = coords.split(",")
+  const x = parseInt(coordsArr[0])
+  const y = parseInt(coordsArr[1])
+  return grid.children[y].children[x] as HTMLElement
+}
+
+export const highlightPath = async (path: HTMLElement[]) => {
+  for (let i = 0; i < path.length; i++) {
+    const cell = path[i]
+    await sleep(0)
+    cell.classList.add("grid__cell--animate-highlight", "grid__cell--current")
+    await sleep(25)
+  }
+}
+
 export const sleep = (ms: number) => {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }

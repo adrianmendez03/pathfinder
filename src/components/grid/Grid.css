@@ -2,7 +2,7 @@
 
 .grid {
   border: 4px solid var(--secondary);
-  background-color: var(--idle);
+  background-color: var(--primary);
   /* width: 310px; */
   height: 348px;
   margin: auto;
@@ -39,14 +39,40 @@
   animation: 0.5s linear grow;
 }
 
+.grid__cell--animate-highlight {
+  animation: 0.5s linear highlight-path;
+}
+
 @keyframes grow {
   from {
     border-radius: 50%;
-    transform: scale(0.25);
+    transform: scale(0);
   }
   to {
     border-radius: 0px;
     tranform: scale(1);
+  }
+}
+
+@keyframes highlight-path {
+  0% {
+    border-radius: 50%;
+    transform: scale(0);
+    background-color: #5603ad;
+  }
+
+  25% {
+    background-color: var(--idle);
+  }
+
+  75% {
+    background-color: #afece7;
+  }
+
+  100% {
+    background-color: var(--accent);
+    border-radius: 0px;
+    transform: scale(1);
   }
 }
 

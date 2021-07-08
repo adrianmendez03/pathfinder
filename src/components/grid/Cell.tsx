@@ -2,14 +2,16 @@ import React from "react"
 
 interface Props {
   index: number
+  rowIndex: number
 }
 
 const Cell: React.FC<Props> = (props) => {
   return (
     <div
-      className={`grid__cell grid__cell--path grid__cell--round col-${props.index}`}
+      className={`grid__cell grid__cell--path col-${props.index}`}
       data-visited="false"
       data-type="path"
+      data-coords={`${props.index},${props.rowIndex}`}
     ></div>
   )
 }
