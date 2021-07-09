@@ -64,10 +64,6 @@
     transform: scale(0);
     background-color: #ff0022;
   }
-  /* 
-  50% {
-    background-color: #41ead4;
-  } */
 
   75% {
     background-color: #41ead4;
@@ -84,11 +80,7 @@
   0% {
     border-radius: 50%;
     transform: scale(0);
-    background-color: #b91372;
-  }
-
-  50% {
-    background-color: #fdfffc;
+    background-color: #fffd82;
   }
 
   75% {
