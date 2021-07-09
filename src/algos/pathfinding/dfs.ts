@@ -32,10 +32,7 @@ export const dfs = async (grid: HTMLElement, start: Cell) => {
     for (let i = 0; i < unvisitedNeighbours.length; i++) {
       const neighbour = unvisitedNeighbours[i]
       if (neighbour && topNode) {
-        neighbour.cell.classList.add(
-          "grid__cell--start",
-          "grid__cell--animate-grow"
-        )
+        neighbour.cell.classList.add("grid__cell--animate-highlight-visited")
         await sleep(25)
         // Create a string of the neighbour's and topNode coordinates ...
         const neighbourString =

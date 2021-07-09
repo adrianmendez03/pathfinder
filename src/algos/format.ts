@@ -9,6 +9,7 @@ export const resetPath = (grid: HTMLElement) => {
       cell.dataset.visited = "false"
       cell.classList.remove("grid__cell--animate-grow")
       cell.classList.remove("grid__cell--animate-highlight")
+      cell.classList.remove("grid__cell--animate-highlight-visited")
       cell.classList.remove("grid__cell--start")
       cell.classList.remove("grid__cell--current")
     }
@@ -24,6 +25,10 @@ export const cleanCell = (tile: HTMLElement) => {
 
   if (classes.has("grid__cell--animate-highlight")) {
     tile.classList.remove("grid__cell--animate-highlight")
+  }
+
+  if (classes.has("grid__cell--animate-highlight-path")) {
+    tile.classList.remove("grid__cell--animate-highlight-visited")
   }
 
   if (classes.has("grid__cell--path")) {

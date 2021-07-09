@@ -39,8 +39,12 @@
   animation: 0.5s linear grow;
 }
 
+.grid__cell--animate-highlight-visited {
+  animation: 1.5s linear highlight-visited forwards;
+}
+
 .grid__cell--animate-highlight {
-  animation: 0.5s linear highlight-path;
+  animation: 1.5s linear highlight-path;
 }
 
 @keyframes grow {
@@ -54,25 +58,47 @@
   }
 }
 
+@keyframes highlight-visited {
+  0% {
+    border-radius: 50%;
+    transform: scale(0);
+    background-color: #ff0022;
+  }
+  /* 
+  50% {
+    background-color: #41ead4;
+  } */
+
+  75% {
+    background-color: #41ead4;
+    transform: scale(1);
+    border-radius: 0px;
+  }
+
+  100% {
+    background-color: var(--idle);
+  }
+}
+
 @keyframes highlight-path {
   0% {
     border-radius: 50%;
     transform: scale(0);
-    background-color: #5603ad;
+    background-color: #b91372;
   }
 
-  25% {
-    background-color: var(--idle);
+  50% {
+    background-color: #fdfffc;
   }
 
   75% {
     background-color: #afece7;
+    transform: scale(1);
+    border-radius: 0px;
   }
 
   100% {
     background-color: var(--accent);
-    border-radius: 0px;
-    transform: scale(1);
   }
 }
 
