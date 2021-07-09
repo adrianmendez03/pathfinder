@@ -19,7 +19,7 @@
   flex-grow: 1;
 }
 
-.grid__cell--path {
+.grid__cell--open {
   background-color: var(--primary);
 }
 
@@ -32,6 +32,14 @@
 }
 
 .grid__cell--current {
+  background-color: var(--accent);
+}
+
+.grid__cell--visited {
+  background-color: var(--idle);
+}
+
+.grid__cell--path {
   background-color: var(--accent);
 }
 

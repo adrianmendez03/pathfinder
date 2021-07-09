@@ -23,14 +23,14 @@ export const randomIntegerBetweenTwoValues = (
 }
 
 export const createWall = (cell: HTMLElement) => {
-  cell.classList.remove("grid__cell--path")
+  cell.classList.remove("grid__cell--open")
   cell.classList.add("grid__cell--wall", "grid__cell--animate-grow")
   cell.dataset.type = "wall"
 }
 
 export const breakdownWall = (cell: HTMLElement) => {
   cell.classList.remove("grid__cell--wall")
-  cell.classList.add("grid__cell--path", "grid__cell--animate-grow")
+  cell.classList.add("grid__cell--open", "grid__cell--animate-grow")
   cell.dataset.type = "path"
 }
 

@@ -1,18 +1,22 @@
 export const tiles = [
   {
-    name: "Wall",
+    name: "wall",
     class: "grid__cell--wall",
   },
   {
-    name: "Path",
-    class: "grid__cell--path",
+    name: "open",
+    class: "grid__cell--open",
   },
   {
-    name: "Current",
-    class: "grid__cell--current",
-  },
-  {
-    name: "start",
+    name: "start/end",
     class: "grid__cell--start",
+  },
+  {
+    name: "visited",
+    class: "grid__cell--visited",
+  },
+  {
+    name: "path",
+    class: "grid__cell--path",
   },
 ]

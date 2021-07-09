@@ -8,7 +8,7 @@ interface Props {
 const Cell: React.FC<Props> = (props) => {
   return (
     <div
-      className={`grid__cell grid__cell--path col-${props.index}`}
+      className={`grid__cell grid__cell--open col-${props.index}`}
       data-visited="false"
       data-type="path"
       data-coords={`${props.index},${props.rowIndex}`}

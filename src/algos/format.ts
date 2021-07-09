@@ -12,6 +12,7 @@ export const resetPath = (grid: HTMLElement) => {
       cell.classList.remove("grid__cell--animate-highlight-visited")
       cell.classList.remove("grid__cell--start")
       cell.classList.remove("grid__cell--current")
+      cell.classList.remove("grid__cell--path")
     }
   }
 }
@@ -27,16 +28,20 @@ export const cleanCell = (tile: HTMLElement) => {
     tile.classList.remove("grid__cell--animate-highlight")
   }
 
-  if (classes.has("grid__cell--animate-highlight-path")) {
+  if (classes.has("grid__cell--animate-highlight-visited")) {
     tile.classList.remove("grid__cell--animate-highlight-visited")
   }
 
-  if (classes.has("grid__cell--path")) {
-    tile.classList.remove("grid__cell--path")
+  if (classes.has("grid__cell--open")) {
+    tile.classList.remove("grid__cell--open")
   }
 
   if (classes.has("grid__cell--wall")) {
     tile.classList.remove("grid__cell--wall")
+  }
+
+  if (classes.has("grid__cell--path")) {
+    tile.classList.remove("grid__cell--path")
   }
 
   if (classes.has("grid__cell--start")) {
@@ -56,7 +61,7 @@ export const noWalls = async (grid: HTMLElement) => {
       const cell = grid.children[i].children[j] as HTMLElement
       cell.dataset.visited = "false"
       cleanCell(cell)
-      cell.classList.add("grid__cell--path")
+      cell.classList.add("grid__cell--open")
       cell.dataset.type = "path"
     }
   }
@@ -74,7 +79,7 @@ export const seperatedCells = (grid: HTMLElement) => {
       // ... if cell is even on its x and y axis make it a path
       // else make it a wall
       if (i % 2 === 0 && j % 2 === 0) {
-        cell.classList.add("grid__cell--path")
+        cell.classList.add("grid__cell--open")
         cell.dataset.type = "path"
       } else {
         cell.classList.add("grid__cell--wall")
