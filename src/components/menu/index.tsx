@@ -149,8 +149,14 @@ const Menu: React.FC<Props> = (props) => {
       running: true,
     })
 
-    await button.format(props.grid)
-    await button.function(props.grid)
+    if (button.format) {
+      await button.format(props.grid)
+    }
+
+    if (button.function) {
+      await button.function(props.grid)
+    }
+
     await placeStartAndEndPoints()
 
     setOptions({

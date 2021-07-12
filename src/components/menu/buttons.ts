@@ -33,6 +33,10 @@ export const mazes = {
   header: "maze generation",
   buttons: [
     {
+      name: "clear grid",
+      format: noWalls,
+    },
+    {
       name: "randomized dfs",
       function: mazeDfs,
       format: seperatedCells,
