@@ -12,7 +12,7 @@ interface Props {
 
 interface Options {
   algo: ButtonFormat | null
-  maze: string | null
+  maze: string
   distance: string
   running: boolean
 }
@@ -20,7 +20,7 @@ interface Options {
 const Menu: React.FC<Props> = (props) => {
   const [options, setOptions] = useState<Options>({
     algo: null,
-    maze: null,
+    maze: "clear grid",
     distance: "mid",
     running: false,
   })
