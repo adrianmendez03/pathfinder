@@ -11,11 +11,13 @@ const breakRandomCeiling = async (
     const randomIndex = randomInteger(currentRun.length)
     const randomValue = currentRun[randomIndex]
     breakdownWall(
-      grid.children[randomValue[1] - 1].children[randomValue[0]] as HTMLElement
+      grid.children[randomValue[1] - 1].children[randomValue[0]] as HTMLElement,
+      "grid__cell--animate-shrink"
     )
   } else {
     breakdownWall(
-      grid.children[coords[1] - 1].children[coords[0]] as HTMLElement
+      grid.children[coords[1] - 1].children[coords[0]] as HTMLElement,
+      "grid__cell--animate-shrink"
     )
   }
 }
@@ -38,7 +40,10 @@ export const sideWinder = async (grid: HTMLElement) => {
       // If the tile is in the first row...
       if (i === 0 && j < width - 1) {
         // ... breakdown the west wall.
-        breakdownWall(grid.children[i].children[j + 1] as HTMLElement)
+        breakdownWall(
+          grid.children[i].children[j + 1] as HTMLElement,
+          "grid__cell--animate-shrink"
+        )
       }
       // If it is the last tile in the row...
       else if (j === width - 1) {
@@ -54,7 +59,10 @@ export const sideWinder = async (grid: HTMLElement) => {
         // Flip a coin to decide if you'll continue the segment..
         if (randomInteger(2)) {
           // ... if segment continues, break the west wall.
-          breakdownWall(grid.children[i].children[j + 1] as HTMLElement)
+          breakdownWall(
+            grid.children[i].children[j + 1] as HTMLElement,
+            "grid__cell--animate-shrink"
+          )
         }
         // Else...
         else {

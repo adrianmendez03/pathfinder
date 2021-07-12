@@ -28,9 +28,10 @@ export const createWall = (cell: HTMLElement) => {
   cell.dataset.type = "wall"
 }
 
-export const breakdownWall = (cell: HTMLElement) => {
+export const breakdownWall = async (cell: HTMLElement, animation: string) => {
+  cell.classList.add("grid__cell--open", animation)
+  await sleep(1000)
   cell.classList.remove("grid__cell--wall")
-  cell.classList.add("grid__cell--open", "grid__cell--animate-grow")
   cell.dataset.type = "path"
 }
 

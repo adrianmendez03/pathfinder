@@ -112,7 +112,7 @@ const dfs = async (grid: HTMLElement) => {
       ].children[
         (currentCell!.coords.x + randomNeighbour!.coords.x) / 2
       ] as HTMLElement
-      breakdownWall(wall)
+      breakdownWall(wall, "grid__cell--animate-shrink")
       // ... mark the neighbour as visited and push it into the stack.
       randomNeighbour!.cell.dataset.visited = "true"
       stack.push(randomNeighbour)

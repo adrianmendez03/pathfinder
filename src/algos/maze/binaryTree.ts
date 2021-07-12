@@ -44,26 +44,26 @@ export const binaryTree = async (grid: HTMLElement) => {
         if (randomInteger(2)) {
           // ... connect cell to north neighbour.
           const northNeighbour = grid.children[i - 1].children[j] as HTMLElement
-          breakdownWall(northNeighbour)
+          breakdownWall(northNeighbour, "grid__cell--animate-shrink")
         }
         // If tails ...
         else {
           // ... connect cell to west neighbour
           const westNeighbour = grid.children[i].children[j - 1] as HTMLElement
-          breakdownWall(westNeighbour)
+          breakdownWall(westNeighbour, "grid__cell--animate-shrink")
         }
       }
       // If only north exists...
       else if (neighbours.north) {
         // ... connect cell to north neighbour.
         const northNeighbour = grid.children[i - 1].children[j] as HTMLElement
-        breakdownWall(northNeighbour)
+        breakdownWall(northNeighbour, "grid__cell--animate-shrink")
       }
       // If only west exists...
       else if (neighbours.west) {
         // ... connect cell to west neighbour.
         const westNeighbour = grid.children[i].children[j - 1] as HTMLElement
-        breakdownWall(westNeighbour)
+        breakdownWall(westNeighbour, "grid__cell--animate-shrink")
       }
       // Unmark the current cell
       cell.classList.remove("grid__cell--current")

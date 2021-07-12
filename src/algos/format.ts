@@ -13,6 +13,7 @@ export const resetPath = (grid: HTMLElement) => {
       const cell = grid.children[i].children[j] as HTMLElement
       resetCellData(cell)
       cell.classList.remove("grid__cell--animate-grow")
+      // cell.classList.remove("grid__cell--animate-shrink")
       cell.classList.remove("grid__cell--animate-highlight")
       cell.classList.remove("grid__cell--animate-highlight-visited")
       cell.classList.remove("grid__cell--start")
@@ -22,39 +23,43 @@ export const resetPath = (grid: HTMLElement) => {
   }
 }
 
-export const cleanCell = (tile: HTMLElement) => {
-  const classes = new Set(tile.classList)
+export const cleanCell = (cell: HTMLElement) => {
+  const classes = new Set(cell.classList)
 
   if (classes.has("grid__cell--animate-grow")) {
-    tile.classList.remove("grid__cell--animate-grow")
+    cell.classList.remove("grid__cell--animate-grow")
+  }
+
+  if (classes.has("grid__cell--animate-shrink")) {
+    cell.classList.remove("grid__cell--animate-shrink")
   }
 
   if (classes.has("grid__cell--animate-highlight")) {
-    tile.classList.remove("grid__cell--animate-highlight")
+    cell.classList.remove("grid__cell--animate-highlight")
   }
 
   if (classes.has("grid__cell--animate-highlight-visited")) {
-    tile.classList.remove("grid__cell--animate-highlight-visited")
+    cell.classList.remove("grid__cell--animate-highlight-visited")
   }
 
   if (classes.has("grid__cell--open")) {
-    tile.classList.remove("grid__cell--open")
+    cell.classList.remove("grid__cell--open")
   }
 
   if (classes.has("grid__cell--wall")) {
-    tile.classList.remove("grid__cell--wall")
+    cell.classList.remove("grid__cell--wall")
   }
 
   if (classes.has("grid__cell--path")) {
-    tile.classList.remove("grid__cell--path")
+    cell.classList.remove("grid__cell--path")
   }
 
   if (classes.has("grid__cell--start")) {
-    tile.classList.remove("grid__cell--start")
+    cell.classList.remove("grid__cell--start")
   }
 
   if (classes.has("grid__cell--current")) {
-    tile.classList.remove("grid__cell--current")
+    cell.classList.remove("grid__cell--current")
   }
 }
 
