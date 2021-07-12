@@ -1,12 +1,17 @@
 import { generateBounds } from "./utils"
 
+const resetCellData = (cell: HTMLElement) => {
+  cell.dataset.visited = "false"
+  cell.dataset.distance = "infinity"
+}
+
 export const resetPath = (grid: HTMLElement) => {
   const bounds = generateBounds(grid)
 
   for (let i = 0; i < bounds.y.end; i++) {
     for (let j = 0; j < bounds.x.end; j++) {
       const cell = grid.children[i].children[j] as HTMLElement
-      cell.dataset.visited = "false"
+      resetCellData(cell)
       cell.classList.remove("grid__cell--animate-grow")
       cell.classList.remove("grid__cell--animate-highlight")
       cell.classList.remove("grid__cell--animate-highlight-visited")
@@ -59,7 +64,7 @@ export const noWalls = async (grid: HTMLElement) => {
   for (let i = 0; i < bounds.y.end; i++) {
     for (let j = 0; j < bounds.x.end; j++) {
       const cell = grid.children[i].children[j] as HTMLElement
-      cell.dataset.visited = "false"
+      resetCellData(cell)
       cleanCell(cell)
       cell.classList.add("grid__cell--open")
       cell.dataset.type = "path"
@@ -74,7 +79,7 @@ export const seperatedCells = (grid: HTMLElement) => {
   for (let i = 0; i < bounds.y.end; i++) {
     for (let j = 0; j < bounds.x.end; j++) {
       const cell = grid.children[i].children[j] as HTMLElement
-      cell.dataset.visited = "false"
+      resetCellData(cell)
       cleanCell(cell)
       // ... if cell is even on its x and y axis make it a path
       // else make it a wall
